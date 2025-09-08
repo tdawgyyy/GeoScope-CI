@@ -188,15 +188,6 @@
             </children>
         </HBox>
 
-        <Button fx:id="startAdventureButton" mnemonicParsing="false" onAction="#startNewAdventure"
-                prefWidth="400.0" style="-fx-background-color: #4caf50; -fx-text-fill: white;
-            -fx-font-weight: bold; -fx-font-size: 20px; -fx-background-radius: 5px;"
-                text="🌎  Start Your New Adventure!">
-            <VBox.margin>
-                <Insets top="20.0" />
-            </VBox.margin>
-        </Button>
-
 
 
 

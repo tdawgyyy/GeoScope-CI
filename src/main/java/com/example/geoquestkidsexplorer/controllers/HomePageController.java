@@ -45,12 +45,7 @@ public class HomePageController {
      * Handles the "Start Your New Adventure!" button action.
      * Note: This method should be called from the HomePageController itself.
      */
-    @FXML
-    private void startNewAdventure(ActionEvent event) {
-        // Here you would add the logic to switch to the main game screen,
-        // likely by calling a method in the MainController.
-        System.out.println("Starting a new adventure!");
-    }
+
 
     @FXML
     private void handleOceaniaClick(ActionEvent event) {
