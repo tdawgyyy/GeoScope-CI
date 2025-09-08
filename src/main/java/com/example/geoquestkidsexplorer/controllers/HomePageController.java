@@ -3,6 +3,14 @@ package com.example.geoquestkidsexplorer.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+import java.io.IOException;
+
 
 public class HomePageController {
 
@@ -38,7 +46,7 @@ public class HomePageController {
         perfectScoreLabel.setText("0");
         correctAnswerLabel.setText("100%");
         currentLevelLabel.setText("Current Level");
-        levelsCompletedLabel.setText("0/54");
+        levelsCompletedLabel.setText("0/7");
     }
 
     /**
@@ -46,16 +54,40 @@ public class HomePageController {
      * Note: This method should be called from the HomePageController itself.
      */
 
-
     @FXML
     private void handleOceaniaClick(ActionEvent event) {
-        System.out.println("Oceania has been clicked");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/oceania.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Oceania");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
+
 
     @FXML
     private void handleAntarcticaClick(ActionEvent event) {
-        System.out.println("Antarctica has been clicked");
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/antarctica.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle("Antarctica");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
 
     @FXML
     private void handleSouthAmericaClick(ActionEvent event) {
