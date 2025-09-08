@@ -1,0 +1,190 @@
+/* style.css */
+
+/*
+* General Styles
+*/
+.root {
+    -fx-font-family: "System";
+    -fx-background-color: #f0f0f0;
+}
+
+/*
+* Top Navigation Bar
+*/
+.nav-bar {
+    -fx-background-color: #3b82f6;
+    -fx-padding: 10 20;
+    -fx-alignment: center-left;
+}
+
+.nav-bar-title {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+}
+
+.score-box {
+    -fx-background-color: #60a5fa;
+    -fx-background-radius: 25;
+    -fx-padding: 10 15;
+    -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);
+}
+
+.score-label, .score-value {
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+}
+
+/*
+* Side Navigation Bar
+*/
+/*.side-bar {
+    -fx-background-color: #435c75;
+    -fx-spacing: 20px;
+    -fx-alignment: top-center;
+    -fx-padding: 20px 0;
+    -fx-transition: pref-width 0.3s ease-in-out;
+}*/
+.side-bar {
+    -fx-background-color: #4a90e2;
+    -fx-spacing: 20px;
+    -fx-alignment: top-center;
+    -fx-padding: 20px 0;
+    -fx-transition: pref-width 0.3s ease-in-out;
+}
+
+.nav-icon-container {
+    -fx-alignment: center-left;
+    -fx-cursor: hand;
+    -fx-padding: 10 5;
+    -fx-background-color: transparent;
+    -fx-background-radius: 5px;
+}
+
+.nav-icon-container:hover {
+    -fx-background-color: #55728a;
+}
+
+.nav-icon-emoji {
+    -fx-font-size: 50px; /* Increased font size */
+    -fx-text-fill: white;
+}
+
+.nav-icon-text {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-opacity: 0; /* Initially hidden */
+    -fx-transition: opacity 0.3s ease-in-out;
+}
+
+/* On hover, the sidebar's width expands and text becomes visible */
+.side-bar:hover {
+    -fx-pref-width: 200px; /* Expands the sidebar */
+}
+
+.side-bar:hover .nav-icon-text {
+    -fx-opacity: 1; /* Makes the text visible */
+}
+
+/*
+* Main Dashboard Content (Welcome Box and Stats Tiles)
+*/
+.main-content {
+    -fx-padding: 40px;
+    -fx-alignment: center;
+    -fx-spacing: 30px;
+}
+
+.welcome-box {
+    -fx-background-color: #ffffff;
+    -fx-padding: 20px;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-alignment: center-left;
+}
+
+.profile-avatar-box {
+    -fx-background-color: #e0f2f1;
+    -fx-background-radius: 100%;
+    -fx-min-width: 100px;
+    -fx-min-height: 100px;
+    -fx-max-width: 100px;
+    -fx-max-height: 100px;
+    -fx-alignment: center;
+}
+
+.profile-avatar-label {
+    -fx-font-size: 60px;
+}
+
+.welcome-text {
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+    -fx-text-fill: #333333;
+}
+
+.subtitle-text {
+    -fx-font-size: 18px;
+    -fx-text-fill: #666666;
+}
+
+/*
+* Stats Tiles Section (Your old stat-tile styles)
+*/
+.stats-container {
+    -fx-alignment: center;
+    -fx-spacing: 20;
+}
+
+.stat-tile {
+    -fx-pref-width: 220;
+    -fx-pref-height: 220;
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);
+    -fx-spacing: 10;
+}
+
+/* Specific background colors for each tile */
+.stat-tile[userData="perfect-scores-tile"] {
+    -fx-background-color: #fff9c4;
+}
+
+.stat-tile[userData="correct-answers-tile"] {
+    -fx-background-color: #fffde7;
+}
+
+.stat-tile[userData="geographic-explorer-tile"] {
+    -fx-background-color: #b3e5fc;
+}
+
+.stat-tile[userData="levels-completed-tile"] {
+    -fx-background-color: #ffe0b2;
+}
+
+/* Hover effect for tiles */
+.stat-tile:hover {
+    -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-scale-y: 1.05;
+    -fx-scale-x: 1.05;
+}
+
+.tile-icon {
+    -fx-font-size: 60px;
+}
+
+.tile-title {
+    -fx-text-fill: #666666;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-font-style: italic;
+}
+
+.tile-value {
+    -fx-text-fill: #333333;
+    -fx-font-weight: bold;
+    -fx-font-size: 28px;
+}

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="30.0"
+      style="-fx-background-color: #f0f4f8;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.geoquestkidsexplorer.controllers.HomePageController">
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #ffffff; -fx-padding: 20px;
+        -fx-background-radius: 10px; -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+            <children>
+                <VBox alignment="CENTER" style="-fx-background-color: #e0f2f1; -fx-background-radius: 100%;
+                -fx-min-width: 100px; -fx-min-height: 100px; -fx-max-width: 100px; -fx-max-height: 100px;
+                -fx-alignment: center;">
+                    <children>
+                        <Label fx:id="explorerAvatarLabel" style="-fx-font-size: 60px;" text="👦" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER_LEFT" spacing="5.0">
+                    <children>
+                        <Label fx:id="explorerNameLabel" text="Welcome, Explorer Name!">
+                            <font>
+                                <Font name="System Bold" size="28.0" />
+                            </font>
+                        </Label>
+                        <Label text="Ready to start your Adventure!">
+                            <font>
+                                <Font size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <HBox alignment="CENTER" spacing="20.0">
+            <children>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
+                      style="-fx-background-color: #c8e6c9; -fx-background-radius: 10px;
+                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                    <children>
+                        <Label style="-fx-font-size: 60px;" text="🏆" />
+                        <Label fx:id="perfectScoreLabel" style="-fx-font-weight: bold; -fx-font-size: 28px;" text="0" />
+                        <Label style="-fx-font-weight: bold;" text="Perfect Score">
+                            <font>
+                                <Font name="System Italic" size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
+                      style="-fx-background-color: #ffcdd2; -fx-background-radius: 10px;
+                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                    <children>
+                        <Label style="-fx-font-size: 60px;" text="⭐" />
+                        <Label fx:id="correctAnswerLabel" style="-fx-font-weight: bold; -fx-font-size: 28px;" text="100%" />
+                        <Label style="-fx-font-weight: bold;" text="Correct Answers">
+                            <font>
+                                <Font name="System Italic" size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
+                      style="-fx-background-color: #b3e5fc; -fx-background-radius: 10px;
+                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                    <children>
+                        <Label style="-fx-font-size: 60px;" text="🌍" />
+                        <Label style="-fx-font-weight: bold;" text="Geographic Explorer">
+                            <font>
+                                <Font name="System Italic" size="20.0" />
+                            </font>
+                        </Label>
+                        <Label fx:id="currentLevelLabel" style="-fx-font-weight: bold; -fx-font-size: 16px;" text="Current Level" />
+                    </children>
+                </VBox>
+                <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
+                      style="-fx-background-color: #ffe0b2; -fx-background-radius: 10px;
+                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                    <children>
+                        <Label style="-fx-font-size: 60px;" text="🏅" />
+                        <Label fx:id="levelsCompletedLabel" style="-fx-font-weight: bold; -fx-font-size: 28px;" text="0" />
+                        <Label style="-fx-font-weight: bold;" text="Levels Completed">
+                            <font>
+                                <Font name="System Italic" size="18.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+
+        <Button fx:id="startAdventureButton" mnemonicParsing="false" onAction="#startNewAdventure"
+                prefWidth="400.0" style="-fx-background-color: #4caf50; -fx-text-fill: white;
+            -fx-font-weight: bold; -fx-font-size: 20px; -fx-background-radius: 5px;"
+                text="🌎  Start Your New Adventure!">
+            <VBox.margin>
+                <Insets top="20.0" />
+            </VBox.margin>
+        </Button>
+    </children>
+</VBox>

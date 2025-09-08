@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="20.0" style="-fx-background-color: #f0f0f0;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.geoquestkidsexplorer.controllers.FunFactsController">
+    <children>
+        <VBox alignment="CENTER" spacing="10.0">
+            <children>
+                <Label style="-fx-text-fill: #3b82f6; -fx-font-weight: bold; -fx-font-size: 32px;" text="Amazing Geographic Fun Facts" />
+<!--                <Label style="-fx-font-size: 40px;" text="🤓" />-->
+            </children>
+        </VBox>
+
+        <VBox alignment="CENTER" minHeight="500.0" prefWidth="1000.0" spacing="20.0" style="-fx-background-color: #ffffff;
+        -fx-padding: 40px; -fx-background-radius: 10px; -fx-border-radius: 10px;
+        -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <children>
+                <FlowPane alignment="CENTER" hgap="30.0" vgap="30.0">
+                    <children>
+                        <VBox alignment="CENTER" onMouseClicked="#loadAfricaFacts" prefHeight="175.0" prefWidth="225.0"
+                              style="-fx-background-color: #c8e6c9; -fx-background-radius: 10px;
+                              -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                            <children>
+                                <Label style="-fx-font-size: 80px;" text="🦁" />
+                                <Label text="Africa">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" onMouseClicked="#loadAsiaFacts" prefHeight="175.0" prefWidth="225.0"
+                              style="-fx-background-color: #ffe0b2; -fx-background-radius: 10px;
+                              -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                            <children>
+                                <Label style="-fx-font-size: 80px;" text="🏯" />
+                                <Label text="Asia">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" onMouseClicked="#loadEuropeFacts" prefHeight="175.0" prefWidth="225.0"
+                              style="-fx-background-color: #b3e5fc; -fx-background-radius: 10px;
+                              -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                            <children>
+                                <Label style="-fx-font-size: 80px;" text="🏰" />
+                                <Label text="Europe">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" onMouseClicked="#loadNorthAmericaFacts" prefHeight="175.0" prefWidth="225.0"
+                              style="-fx-background-color: #ffcdd2; -fx-background-radius: 10px;
+                              -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                            <children>
+                                <Label style="-fx-font-size: 80px;" text="🗽" />
+                                <Label text="North America">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" onMouseClicked="#loadSouthAmericaFacts" prefHeight="175.0" prefWidth="225.0"
+                              style="-fx-background-color: #e6ee9c; -fx-background-radius: 10px;
+                              -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                            <children>
+                                <Label style="-fx-font-size: 80px;" text="🌺" />
+                                <Label text="South America">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" onMouseClicked="#loadOceaniaFacts" prefHeight="175.0" prefWidth="225.0"
+                              style="-fx-background-color: #b2ebf2; -fx-background-radius: 10px;
+                              -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                            <children>
+                                <Label style="-fx-font-size: 80px;" text="🐨" />
+                                <Label text="Oceania">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                        <VBox alignment="CENTER" onMouseClicked="#loadAntarcticaFacts" prefHeight="175.0" prefWidth="225.0"
+                              style="-fx-background-color: #e1f5fe; -fx-background-radius: 10px;
+                              -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                            <children>
+                                <Label style="-fx-font-size: 80px;" text="🐧" />
+                                <Label text="Antarctica">
+                                    <font>
+                                        <Font name="System Bold" size="24.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </VBox>
+                    </children>
+                </FlowPane>
+            </children>
+            <VBox.margin>
+                <Insets top="40.0" />
+            </VBox.margin>
+        </VBox>
+    </children>
+</VBox>

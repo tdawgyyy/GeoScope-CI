@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: #f0f0f0;"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.geoquestkidsexplorer.controllers.ProfileCreationController">
+    <children>
+        <!-- Main Content Box -->
+        <VBox alignment="CENTER" prefHeight="600.0" prefWidth="1000.0" spacing="20.0"
+              style="-fx-background-color: #ffffff; -fx-padding: 40px; -fx-background-radius: 10px; -fx-border-radius: 10px;
+              -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.2), 10, 0, 0, 0);">
+            <children>
+                <Label text="Create Your Explorer Profile!">
+                    <font>
+                        <Font name="System Bold" size="28.0" />
+                    </font>
+                </Label>
+                <Label text="Choose your Avatar and your explorer name!">
+                    <font>
+                        <Font size="16.0" />
+                    </font>
+                </Label>
+
+                <!-- Two separate sections using HBox -->
+                <HBox alignment="CENTER" spacing="40.0">
+
+                    <!-- Left Section: Avatar Selection -->
+                    <VBox alignment="TOP_CENTER" prefHeight="400.0" prefWidth="500.0" spacing="20.0"
+                          style="-fx-background-color: #f4f4f4; -fx-padding: 20px; -fx-background-radius: 8px;
+                          -fx-border-radius: 8px; -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                        <children>
+                            <Label text="Choose your Avatar Here!">
+                                <font>
+                                    <Font name="System Bold" size="20.0" />
+                                </font>
+                            </Label>
+
+                            <!-- Avatar Selection Tiles -->
+                            <FlowPane alignment="CENTER" hgap="20.0" vgap="20.0">
+                                <!-- Avatar 1 Tile -->
+                                <VBox fx:id="explorerBoyTile" alignment="CENTER" onMouseClicked="#selectAvatar"
+                                      style="-fx-min-width: 120; -fx-min-height: 120; -fx-max-width: 120; -fx-max-height: 120;
+                                      -fx-background-color: #b3e5fc; -fx-background-radius: 10px;
+                                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);
+                                      -fx-padding: 15px; -fx-cursor: hand; -fx-border-color: transparent;
+                                      -fx-border-width: 3px; -fx-border-radius: 10px;" userData="explorer_boy">
+                                    <children>
+                                        <Label style="-fx-font-size: 60px;" text="👦" />
+                                        <Label text="Explorer Boy">
+                                            <font>
+                                                <Font name="System Italic" size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                                <!-- Avatar 2 Tile -->
+                                <VBox fx:id="explorerGirlTile" alignment="CENTER" onMouseClicked="#selectAvatar"
+                                      style="-fx-min-width: 120; -fx-min-height: 120; -fx-max-width: 120;
+                                      -fx-max-height: 120; -fx-background-color: #ffcdd2; -fx-background-radius: 10px;
+                                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);
+                                      -fx-padding: 15px; -fx-cursor: hand; -fx-border-color: transparent;
+                                      -fx-border-width: 3px; -fx-border-radius: 10px;" userData="explorer_girl">
+                                    <children>
+                                        <Label style="-fx-font-size: 60px;" text="👧" />
+                                        <Label text="Explorer Girl">
+                                            <font>
+                                                <Font name="System Italic" size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                                <!-- Avatar 3 Tile -->
+                                <VBox fx:id="explorerBoyStudentTile" alignment="CENTER" onMouseClicked="#selectAvatar"
+                                      style="-fx-min-width: 120; -fx-min-height: 120; -fx-max-width: 120; -fx-max-height: 120;
+                                      -fx-background-color: #c8e6c9; -fx-background-radius: 10px;
+                                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 15px;
+                                      -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 3px;
+                                      -fx-border-radius: 10px;" userData="explorer_boy-student">
+                                    <children>
+<!--                                        <Label style="-fx-font-size: 60px;" text="🎓" />-->
+                                        <Label style="-fx-font-size: 60px;" text="👨‍🎓" />
+                                        <Label text="Explorer Student">
+                                            <font>
+                                                <Font name="System Italic" size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                                <!-- Avatar 4 Tile -->
+                                <VBox fx:id="explorerGirStudentTile" alignment="CENTER" onMouseClicked="#selectAvatar"
+                                      style="-fx-min-width: 120; -fx-min-height: 120; -fx-max-width: 120; -fx-max-height: 120;
+                                      -fx-background-color:#cfd8dc;; -fx-background-radius: 10px;
+                                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 15px;
+                                      -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 3px;
+                                      -fx-border-radius: 10px;" userData="explorer_girl-student">
+                                    <children>
+                                        <!-- <Label style="-fx-font-size: 60px;" text="🎓" />-->
+                                        <Label style="-fx-font-size: 60px;" text="👩‍🎓"/>
+                                        <Label text="Explorer Student">
+                                            <font>
+                                                <Font name="System Italic" size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                                <!-- Avatar 5 Tile -->
+                                <VBox fx:id="explorerMagicianTile" alignment="CENTER" onMouseClicked="#selectAvatar"
+                                      style="-fx-min-width: 120; -fx-min-height: 120; -fx-max-width: 120; -fx-max-height: 120;
+                                      -fx-background-color: #ffe0b2; -fx-background-radius: 10px;
+                                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 15px;
+                                      -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 3px;
+                                      -fx-border-radius: 10px;" userData="explorer_magician">
+                                    <children>
+                                        <Label style="-fx-font-size: 60px;" text="🧙‍♂️" />
+                                        <Label text="Explorer Magician">
+                                            <font>
+                                                <Font name="System Italic" size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                                <!-- Avatar 6 Tile -->
+                                <VBox fx:id="explorerElfTile" alignment="CENTER" onMouseClicked="#selectAvatar"
+                                      style="-fx-min-width: 120; -fx-min-height: 120; -fx-max-width: 120; -fx-max-height: 120;
+                                      -fx-background-color: #e1f5fe; -fx-background-radius: 10px;
+                                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 15px;
+                                      -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 3px;
+                                      -fx-border-radius: 10px;" userData="explorer_elf">
+                                    <children>
+                                        <Label style="-fx-font-size: 60px;" text="🧝‍♀️" />
+                                        <Label text="Explorer Elf">
+                                            <font>
+                                                <Font name="System Italic" size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                                <!-- Avatar 7 Tile -->
+                                <VBox fx:id="explorerWizardTile" alignment="CENTER" onMouseClicked="#selectAvatar"
+                                      style="-fx-min-width: 120; -fx-min-height: 120; -fx-max-width: 120; -fx-max-height: 120;
+                                      -fx-background-color: #ffcdd2; -fx-background-radius: 10px;
+                                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0); -fx-padding: 15px;
+                                      -fx-cursor: hand; -fx-border-color: transparent; -fx-border-width: 3px;
+                                      -fx-border-radius: 10px;" userData="explorer_wizard">
+                                    <children>
+                                        <Label style="-fx-font-size: 60px;" text="🧙‍♀️" />
+                                        <Label text="Explorer Wizard">
+                                            <font>
+                                                <Font name="System Italic" size="12.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </VBox>
+                            </FlowPane>
+                        </children>
+                    </VBox>
+
+                    <!-- Right Section: Profile Preview and Input -->
+                    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="500.0" spacing="10.0"
+                          style="-fx-background-color: #e0e0e0; -fx-padding: 20px; -fx-background-radius: 8px;
+                          -fx-border-radius: 8px; -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                        <children>
+                            <Label text="Your Explorer Profile!">
+                                <font>
+                                    <Font name="System Bold" size="20.0" />
+                                </font>
+                            </Label>
+                            <!-- New, dedicated box for the profile preview -->
+                            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
+                                  style="-fx-background-color: #ffffff; -fx-padding: 20px; -fx-background-radius: 8px;
+                                  -fx-border-radius: 8px; -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                                <children>
+                                    <Label fx:id="previewAvatarLabel" text="👦" >
+                                        <font>
+                                            <Font size="60.0" />
+                                        </font>
+                                    </Label>
+                                    <Label fx:id="previewNameLabel" text="Choose your name!">
+                                        <font>
+                                            <Font size="24.0" />
+                                        </font>
+                                    </Label>
+                                    <Label text="Geographic explorer!">
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Label>
+                                </children>
+                            </VBox>
+                            <VBox spacing="5.0" style="-fx-alignment: LEFT;">
+                                <children>
+                                    <Label text="Explorer Name:">
+                                        <font>
+                                            <Font size="16.0" />
+                                        </font>
+                                    </Label>
+                                    <TextField fx:id="explorerNameField" alignment="BASELINE_LEFT" prefWidth="250.0"
+                                               promptText="Enter Your Explorer Name....." />
+                                </children>
+                            </VBox>
+                        </children>
+                    </VBox>
+                </HBox>
+                <Button fx:id="createProfileButton" mnemonicParsing="false" onAction="#createProfile" prefWidth="250.0"
+                        style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5px;"
+                        text="Create Your Profile Now!" />
+            </children>
+        </VBox>
+        <Label fx:id="messageLabel" style="-fx-text-fill: red; -fx-font-size: 14px; -fx-padding: 10px 0 0 0;" />
+    </children>
+</VBox>
+
