@@ -51,4 +51,41 @@ public class HomePageController {
         // likely by calling a method in the MainController.
         System.out.println("Starting a new adventure!");
     }
+
+    @FXML
+    private void handleOceaniaClick(ActionEvent event) {
+        System.out.println("Oceania has been clicked");
+    }
+
+    @FXML
+    private void handleAntarcticaClick(ActionEvent event) {
+        System.out.println("Antarctica has been clicked");
+    }
+
+    @FXML
+    private void handleSouthAmericaClick(ActionEvent event) {
+        System.out.println("South America has been clicked");
+    }
+
+    @FXML
+    private void handleNorthAmericaClick(ActionEvent event) {
+        System.out.println("North America has been clicked");
+    }
+
+    @FXML
+    private void handleEuropeClick(ActionEvent event) {
+        System.out.println("Europe has been clicked");
+    }
+
+    @FXML
+    private void handleAsiaClick(ActionEvent event) {
+        System.out.println("Asia has been clicked");
+    }
+
+    @FXML
+    private void handleAfricaClick(ActionEvent event) {
+        System.out.println("Africa has been clicked");
+    }
+
+
 }
