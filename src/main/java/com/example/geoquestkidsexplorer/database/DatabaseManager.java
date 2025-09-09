@@ -38,7 +38,6 @@ public class DatabaseManager {
             st.execute("PRAGMA foreign_keys=ON");
         }
     }
-
     // Continents
     private static void createContinentsTable(Connection conn) throws SQLException {
         String sql = """
