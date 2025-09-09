@@ -2,6 +2,7 @@ module com.example.geoquestkidsexplorer {
     requires javafx.controls;
     requires javafx.fxml;
     requires java.sql;
+    requires java.desktop;
 
 
     opens com.example.geoquestkidsexplorer to javafx.fxml;
