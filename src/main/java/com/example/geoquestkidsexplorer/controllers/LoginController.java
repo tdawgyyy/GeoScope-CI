@@ -2,18 +2,18 @@ package com.example.geoquestkidsexplorer.controllers;
 
 import com.example.geoquestkidsexplorer.database.DatabaseManager;
 import javafx.collections.FXCollections;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginController {
 
@@ -40,14 +40,6 @@ public class LoginController {
     private Stage stage;
     public void setStage(Stage stage) { this.stage = stage; }
 
-    // Map display label -> compact key for DB
-    private final Map<String, String> avatarMap = new HashMap<>() {{
-        put("👦 Explorer Boy",     "explorer_boy");
-        put("👧 Explorer Girl",    "explorer_girl");
-        put("👨‍🎓 Student (Boy)",  "explorer_boy-student");
-        put("👩‍🎓 Student (Girl)", "explorer_girl-student");
-    }};
-
     @FXML
     public void initialize() {
         // Default view: Login visible, Register hidden
@@ -68,7 +60,7 @@ public class LoginController {
     }
 
     // ===========================
-    // Login
+    // Login (now async)
     // ===========================
     @FXML
     private void handleLogin(ActionEvent event) {
@@ -80,20 +72,65 @@ public class LoginController {
             return;
         }
 
-        try {
-            boolean ok = DatabaseManager.validateLogin(email, password);
+        success("Signing you in…");
+
+        // Run DB validation off the UI thread
+        Task<Boolean> loginTask = new Task<>() {
+            @Override protected Boolean call() {
+                return DatabaseManager.validateLogin(email, password);
+            }
+        };
+
+        loginTask.setOnSucceeded(e -> {
+            boolean ok = Boolean.TRUE.equals(loginTask.getValue());
             if (!ok) {
                 error("Invalid email or password.");
                 return;
             }
+            // Chain: fetch username/avatar off the UI thread too
+            loadHomeAsync(event, email);
+        });
 
-            success("Login successful! Redirecting…");
-            switchToHome(event);
+        loginTask.setOnFailed(e -> {
+            Throwable ex = loginTask.getException();
+            error("Login error: " + (ex != null ? ex.getMessage() : "unknown"));
+        });
 
-        } catch (Exception e) {
-            e.printStackTrace();
-            error("Login error: " + e.getMessage());
-        }
+        new Thread(loginTask, "login-task").start();
+    }
+
+    /** After successful login, fetch username & avatar asynchronously, then switch to home. */
+    private void loadHomeAsync(ActionEvent event, String email) {
+        Task<String[]> userTask = new Task<>() {
+            @Override protected String[] call() {
+                String username = DatabaseManager.getUsernameByEmail(email);
+                String avatar   = DatabaseManager.getAvatarByEmail(email);
+                return new String[] {
+                        (username == null || username.isBlank()) ? "Explorer" : username,
+                        (avatar   == null || avatar.isBlank())   ? "🙂"       : avatar
+                };
+            }
+        };
+
+        userTask.setOnSucceeded(ev -> {
+            String[] ua = userTask.getValue();
+            try {
+                switchToHome(event, ua[0], ua[1]);
+            } catch (IOException io) {
+                error("Failed to open home: " + io.getMessage());
+            }
+        });
+
+        userTask.setOnFailed(ev -> {
+            // Proceed with safe fallbacks even if lookup fails
+            try {
+                switchToHome(event, "Explorer", "🙂");
+            } catch (IOException io) {
+                error("Failed to open home: " + io.getMessage());
+            }
+        });
+
+        new Thread(userTask, "user-lookup-task").start();
     }
 
     // ===========================
@@ -107,8 +144,14 @@ public class LoginController {
         String password = text(registerPasswordField);
         String confirm  = text(confirmPasswordField);
 
-        String avatarDisplay = avatarCombo == null ? null : avatarCombo.getValue();
-        String avatarKey     = avatarDisplay == null ? null : avatarMap.get(avatarDisplay);
+        String avatarDisplay = (avatarCombo == null) ? null : avatarCombo.getValue();
+
+        // Extract emoji from the display string (everything before the first space)
+        String avatarEmoji = null;
+        if (avatarDisplay != null && !avatarDisplay.isBlank()) {
+            int idx = avatarDisplay.indexOf(' ');
+            avatarEmoji = (idx > 0) ? avatarDisplay.substring(0, idx) : avatarDisplay;
+        }
 
         // Basic validation
         if (username.isBlank() || email.isBlank() || role.isBlank() || password.isBlank() || confirm.isBlank()) {
@@ -119,7 +162,7 @@ public class LoginController {
             error("Passwords do not match.");
             return;
         }
-        if (avatarKey == null) {
+        if (avatarEmoji == null || avatarEmoji.isBlank()) {
             error("Please pick an avatar.");
             return;
         }
@@ -131,8 +174,8 @@ public class LoginController {
                 return;
             }
 
-            // Insert user: (username, email, password, avatar, level, role)
-            DatabaseManager.insertUser(username, email, password, avatarKey, null, role);
+            // Insert user: (username, email, password, avatar(emoji), level, role)
+            DatabaseManager.insertUser(username, email, password, avatarEmoji, null, role);
 
             success("Registration successful! Please login.");
             clearRegisterFields();
@@ -173,14 +216,21 @@ public class LoginController {
     // ===========================
     // Navigation
     // ===========================
-    private void switchToHome(ActionEvent event) throws IOException {
+    /** Now takes pre-fetched username & avatar to avoid more DB calls on the FX thread. */
+    private void switchToHome(ActionEvent event, String username, String avatar) throws IOException {
         Stage s = (stage != null) ? stage : deriveStage(event);
+
         FXMLLoader loader = new FXMLLoader(
                 getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml"));
-        Scene scene = new Scene(loader.load(),
-                s.getScene() != null ? s.getScene().getWidth() : 1000,
-                s.getScene() != null ? s.getScene().getHeight() : 700);
-        s.setScene(scene);
+        Parent root = loader.load();
+
+        HomePageController home = loader.getController();
+        home.setProfileData(username, avatar);
+
+        s.setScene(new Scene(root,
+                s.getScene() != null ? s.getScene().getWidth()  : 1000,
+                s.getScene() != null ? s.getScene().getHeight() : 700));
+        s.setTitle("GeoQuest – Home");
         s.show();
     }
 

@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import javafx.scene.control.Label;
 
 public class HomePageController {
 
@@ -27,6 +28,7 @@ public class HomePageController {
     private Label currentLevelLabel;
     @FXML
     private Label levelsCompletedLabel;
+
 
     /**
      * Sets the profile data (name and avatar) on the dashboard.
@@ -72,7 +74,6 @@ public class HomePageController {
             e.printStackTrace();
         }
     }
-
 
     @FXML
     private void handleOceaniaClick(ActionEvent event) {

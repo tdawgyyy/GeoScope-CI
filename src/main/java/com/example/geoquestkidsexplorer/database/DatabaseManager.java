@@ -230,5 +230,32 @@ public class DatabaseManager {
         }
         return null;
     }
+    public static String getUsernameByEmail(String email) {
+        final String sql = "SELECT username FROM users WHERE email = ? LIMIT 1";
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:geoquest.db");
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getString("username");
+            }
+        } catch (SQLException e) {
+            System.err.println("getUsernameByEmail error: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public static String getAvatarByEmail(String email) {
+        final String sql = "SELECT avatar FROM users WHERE email = ? LIMIT 1";
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:geoquest.db");
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getString("avatar");
+            }
+        } catch (SQLException e) {
+            System.err.println("getAvatarByEmail error: " + e.getMessage());
+        }
+        return null;
+    }
 
 }

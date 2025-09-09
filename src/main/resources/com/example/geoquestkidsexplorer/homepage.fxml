@@ -9,20 +9,20 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-
-
-
 <VBox alignment="TOP_CENTER" prefHeight="800.0" prefWidth="1200.0" spacing="30.0"
       style="-fx-background-color: white;"
       xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.geoquestkidsexplorer.controllers.HomePageController">
     <children>
-        <HBox alignment="CENTER_LEFT" spacing="20.0" style="-fx-background-color: #ffffff; -fx-padding: 20px;
-        -fx-background-radius: 10px; -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 10, 0, 0, 0);">
+        <HBox alignment="CENTER_LEFT" spacing="20.0"
+              style="-fx-background-color: #ffffff; -fx-padding: 20px;
+                     -fx-background-radius: 10px;
+                     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);">
             <children>
-                <VBox alignment="CENTER" style="-fx-background-color: #e0f2f1; -fx-background-radius: 100%;
-                -fx-min-width: 100px; -fx-min-height: 100px; -fx-max-width: 100px; -fx-max-height: 100px;
-                -fx-alignment: center;">
+                <VBox alignment="CENTER"
+                      style="-fx-background-color: #e0f2f1; -fx-background-radius: 100%;
+                             -fx-min-width: 100px; -fx-min-height: 100px; -fx-max-width: 100px; -fx-max-height: 100px;
+                             -fx-alignment: center;">
                     <children>
                         <Label fx:id="explorerAvatarLabel" style="-fx-font-size: 60px;" text="👦" />
                     </children>
@@ -43,8 +43,6 @@
                 </VBox>
             </children>
         </HBox>
-
-
 
         <HBox alignment="CENTER" spacing="20.0" style="-fx-padding: 20px;">
             <!-- Antarctica Button -->
@@ -125,17 +123,11 @@
             </Button>
         </HBox>
 
-
-
-
-
-
-
         <HBox alignment="CENTER" spacing="20.0">
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
                       style="-fx-background-color: #c8e6c9; -fx-background-radius: 10px;
-                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                             -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);">
                     <children>
                         <Label style="-fx-font-size: 60px;" text="🏆" />
                         <Label fx:id="perfectScoreLabel" style="-fx-font-weight: bold; -fx-font-size: 28px;" text="0" />
@@ -148,7 +140,7 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
                       style="-fx-background-color: #ffcdd2; -fx-background-radius: 10px;
-                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                             -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);">
                     <children>
                         <Label style="-fx-font-size: 60px;" text="⭐" />
                         <Label fx:id="correctAnswerLabel" style="-fx-font-weight: bold; -fx-font-size: 28px;" text="100%" />
@@ -161,7 +153,7 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
                       style="-fx-background-color: #b3e5fc; -fx-background-radius: 10px;
-                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                             -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);">
                     <children>
                         <Label style="-fx-font-size: 60px;" text="🌍" />
                         <Label style="-fx-font-weight: bold;" text="Geographic Explorer">
@@ -174,7 +166,7 @@
                 </VBox>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
                       style="-fx-background-color: #ffe0b2; -fx-background-radius: 10px;
-                      -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);">
+                             -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);">
                     <children>
                         <Label style="-fx-font-size: 60px;" text="🏅" />
                         <Label fx:id="levelsCompletedLabel" style="-fx-font-weight: bold; -fx-font-size: 28px;" text="0" />
@@ -188,10 +180,9 @@
             </children>
         </HBox>
 
-
-
-
-
+        <Button text="Start Your Adventure!"
+                onAction="#startNewAdventure"
+                prefWidth="220"
+                style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" />
     </children>
 </VBox>
-
