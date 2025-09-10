@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -28,24 +29,25 @@ public class ProfileCreationController {
     // Instance variables to keep track of the selected avatar and the last selected tile
     private String selectedAvatarEmoji;
     private VBox lastSelectedTile = null;
-
+    @FXML private ComboBox<String> avatarCombo;
+    @FXML private Label avatarPreview;
     /**
      * Initializes the controller. This method is called automatically after the FXML has been loaded.
      */
     @FXML
     public void initialize() {
-        // Add a listener to the text field to update the preview name in real-time
-        explorerNameField.textProperty().addListener((obs, oldText, newText) -> {
-            // Check if the new text is empty. If so, revert to "Explorer".
-            // Otherwise, set the preview label to the new text.
-            if (newText.trim().isEmpty()) {
-                previewNameLabel.setText("Explorer");
-            } else {
-                previewNameLabel.setText(newText);
+            if (avatarCombo != null) {
+                avatarCombo.setItems(javafx.collections.FXCollections.observableArrayList(
+                        "👦 Explorer Boy",
+                        "👧 Explorer Girl",
+                        "👨‍🎓 Student (Boy)",
+                        "👩‍🎓 Student (Girl)"
+                ));
+                avatarCombo.valueProperty().addListener((obs, oldV, newV) -> {
+                    avatarPreview.setText((newV == null || newV.isBlank()) ? "🙂" : newV.split(" ")[0]);
+                });
             }
-        });
-    }
-
+        }
     /**
      * Handles the click on any of the avatar tiles.
      * This method will highlight the selected tile and store the avatar emoji.
@@ -101,7 +103,7 @@ public class ProfileCreationController {
         System.out.println("Creating profile for: " + explorerName + " with avatar " + selectedAvatarEmoji);
 
         // Call the DatabaseManager to save the new user profile
-        DatabaseManager.insertUser(explorerName, selectedAvatarEmoji);
+        //DatabaseManager.insertUser(explorerName, selectedAvatarEmoji);
 
         // Get the current stage
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

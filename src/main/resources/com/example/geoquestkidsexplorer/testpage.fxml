@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.example.geoquestkidsexplorer.controllers.TestPageController"
+      prefHeight="400.0" prefWidth="600.0"
+      style="-fx -background-color: white;">
+    <children>
+        <Label text="Test-Blank Screen" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
+        <Label text="Placeholder content for the Test Page" style="-fx-font-size: 16px;"/>
+    </children>
+    <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
+
+</VBox>

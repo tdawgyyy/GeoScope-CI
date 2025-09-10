@@ -2,94 +2,260 @@ package com.example.geoquestkidsexplorer.database;
 
 import com.example.geoquestkidsexplorer.models.UserProfile;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.awt.*;
+import java.io.ByteArrayInputStream;
+import java.sql.*;
+import javafx.scene.image.Image;
 
 public class DatabaseManager {
 
     private static final String DATABASE_URL = "jdbc:sqlite:geoquest.db";
 
+    // ===========================
+    // Init / Schema
+    // ===========================
     public static void createNewDatabase() {
         try (Connection conn = DriverManager.getConnection(DATABASE_URL)) {
             if (conn != null) {
-                System.out.println("A new database has been created.");
-                createNewUserTable(conn);
+                enableForeignKeys(conn);
+
+                createContinentsTable(conn);
+                seedContinents(conn);
+
+                createCountriesTable(conn);
+                createUsersTable(conn);
+                createResultsTable(conn);
+
+                System.out.println("Database created/connected.");
             }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println("DB init error: " + e.getMessage());
         }
     }
 
-    private static void createNewUserTable(Connection conn) {
-        // SQL statement for creating a new table
-        String sql = "CREATE TABLE IF NOT EXISTS users ("
-                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + "name TEXT NOT NULL,"
-                + "avatar TEXT NOT NULL,"
-                + "score INTEGER DEFAULT 0,"
-                + "levels_completed INTEGER DEFAULT 0"
-                + ");";
+    private static void enableForeignKeys(Connection conn) throws SQLException {
+        try (Statement st = conn.createStatement()) {
+            st.execute("PRAGMA foreign_keys=ON");
+        }
+    }
+    // Continents
+    private static void createContinentsTable(Connection conn) throws SQLException {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS continents (
+                continent TEXT PRIMARY KEY,
+                level     INTEGER NOT NULL UNIQUE CHECK(level BETWEEN 1 AND 7)
+            );
+            """;
+        try (Statement st = conn.createStatement()) { st.execute(sql); }
+    }
 
-        try (Statement stmt = conn.createStatement()) {
-            stmt.execute(sql);
-            System.out.println("User table created successfully.");
+    private static void seedContinents(Connection conn) throws SQLException {
+        try (Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery("SELECT COUNT(*) AS c FROM continents")) {
+            if (rs.next() && rs.getInt("c") > 0) return; // already seeded
+        }
+
+        String sql = "INSERT INTO continents (continent, level) VALUES (?, ?)";
+        String[] names = {"Antarctica","Oceania","South America","North America","Europe","Asia","Africa"};
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            conn.setAutoCommit(false);
+            for (int i = 0; i < names.length; i++) {
+                ps.setString(1, names[i]);
+                ps.setInt(2, i + 1); // levels 1..7
+                ps.addBatch();
+            }
+            ps.executeBatch();
+            conn.commit();
+            conn.setAutoCommit(true);
+        }
+    }
+
+    // Countries
+    private static void createCountriesTable(Connection conn) throws SQLException {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS countries (
+                country         TEXT PRIMARY KEY,
+                continent       TEXT NOT NULL,
+                country_picture BLOB,
+                hints           TEXT,
+                FOREIGN KEY (continent) REFERENCES continents(continent)
+                    ON UPDATE CASCADE ON DELETE RESTRICT
+            );
+            """;
+        try (Statement st = conn.createStatement()) { st.execute(sql); }
+    }
+
+    // Users
+    private static void createUsersTable(Connection conn) throws SQLException {
+        // If table already exists, SQLite will keep the existing schema.
+        // New setups will get UNIQUE(email).
+        String sql = """
+            CREATE TABLE IF NOT EXISTS users (
+                username TEXT PRIMARY KEY,
+                avatar   TEXT NOT NULL,
+                email    TEXT UNIQUE,
+                password TEXT NOT NULL,
+                level    INTEGER,
+                role     TEXT,
+                FOREIGN KEY (level) REFERENCES continents(level)
+                    ON UPDATE CASCADE ON DELETE SET NULL
+            );
+            """;
+        try (Statement st = conn.createStatement()) { st.execute(sql); }
+    }
+
+    // Results
+    private static void createResultsTable(Connection conn) throws SQLException {
+        String sql = """
+            CREATE TABLE IF NOT EXISTS results (
+                id_result INTEGER PRIMARY KEY AUTOINCREMENT,
+                username  TEXT NOT NULL,
+                level     INTEGER NOT NULL,
+                grades    REAL,
+                status    TEXT CHECK (status IN ('Pass','Fail')),
+                FOREIGN KEY (username) REFERENCES users(username)
+                    ON UPDATE CASCADE ON DELETE CASCADE,
+                FOREIGN KEY (level) REFERENCES continents(level)
+                    ON UPDATE CASCADE ON DELETE RESTRICT
+            );
+            """;
+        try (Statement st = conn.createStatement()) { st.execute(sql); }
+    }
+
+    // ===========================
+    // Users API
+    // ===========================
+
+    /** Duplicate-safe insert used by Register. */
+    public static void insertUser(String username, String email, String password,
+                                  String avatar, Integer level, String role) {
+        // Pre-check for duplicates
+        if (userExists(username, email)) {
+            throw new RuntimeException("Username or email already exists.");
+        }
+
+        String sql = "INSERT INTO users(username, email, password, avatar, level, role) VALUES (?,?,?,?,?,?)";
+        try (Connection conn = DriverManager.getConnection(DATABASE_URL)) {
+            enableForeignKeys(conn);
+            try (PreparedStatement ps = conn.prepareStatement(sql)) {
+                ps.setString(1, username);
+                ps.setString(2, email);
+                ps.setString(3, password); // ⚠️ In production, store a password hash instead.
+                ps.setString(4, avatar);
+                if (level == null) ps.setNull(5, Types.INTEGER); else ps.setInt(5, level);
+                ps.setString(6, role);
+                ps.executeUpdate();
+            }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println("Insert user error: " + e.getMessage());
+            throw new RuntimeException(e);
         }
     }
 
-    public static void insertUser(String name, String avatar) {
-        String sql = "INSERT INTO users(name, avatar) VALUES(?, ?)";
-
+    /** Returns true if a user with matching username OR email exists. */
+    public static boolean userExists(String username, String email) {
+        final String sql = "SELECT 1 FROM users WHERE username = ? OR email = ? LIMIT 1";
         try (Connection conn = DriverManager.getConnection(DATABASE_URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setString(1, name);
-            pstmt.setString(2, avatar);
-            pstmt.executeUpdate();
-            System.out.println("User inserted successfully.");
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            enableForeignKeys(conn);
+            ps.setString(1, username);
+            ps.setString(2, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println("userExists error: " + e.getMessage());
+            return false;
         }
     }
 
-    public static UserProfile getUserProfile() {
-        String sql = "SELECT name, avatar, score, levels_completed FROM users WHERE id = 1"; // Assuming one user for now
-
+    /** Simple credential check for Login. */
+    public static boolean validateLogin(String email, String password) {
+        final String sql = "SELECT 1 FROM users WHERE email = ? AND password = ? LIMIT 1";
         try (Connection conn = DriverManager.getConnection(DATABASE_URL);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            enableForeignKeys(conn);
+            ps.setString(1, email);
+            ps.setString(2, password); // ⚠️ Compare hashes in production
+            try (ResultSet rs = ps.executeQuery()) {
+                return rs.next();
+            }
+        } catch (SQLException e) {
+            System.err.println("Login validation error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /** Optional helper to load a profile by username. */
+    public static UserProfile getUserProfileByUsername(String username) {
+        final String sql = "SELECT username, email, avatar, level, role FROM users WHERE username = ? LIMIT 1";
+        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            enableForeignKeys(conn);
+            ps.setString(1, username);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    // Adjust to your actual UserProfile constructor/fields
+                    return new UserProfile(
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("avatar"),
+                            rs.getInt("level"),
+                            rs.getString("role")
+                    );
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("getUserProfileByUsername error: " + e.getMessage());
+        }
+        return null;
+    }
+
+    public static Image getCountryImage(String countryName) {
+        String sql = "SELECT country_picture FROM countries WHERE country = ?";
+        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, countryName);
+            ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                String name = rs.getString("name");
-                String avatar = rs.getString("avatar");
-                int score = rs.getInt("score");
-                int levelsCompleted = rs.getInt("levels_completed");
-                return new UserProfile(name, avatar, score, levelsCompleted);
+                byte[] imgBytes = rs.getBytes("country_picture");
+                if (imgBytes != null) {
+                    return new Image(new ByteArrayInputStream(imgBytes));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static String getUsernameByEmail(String email) {
+        final String sql = "SELECT username FROM users WHERE email = ? LIMIT 1";
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:geoquest.db");
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getString("username");
             }
         } catch (SQLException e) {
-            System.err.println(e.getMessage());
+            System.err.println("getUsernameByEmail error: " + e.getMessage());
         }
-        return null; // Return null if no user is found
+        return null;
     }
 
-    public static void printAllUsers() {
-        String sql = "SELECT id, name, avatar FROM users";
-
-        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-
-            while (rs.next()) {
-                System.out.println("ID: " + rs.getInt("id") +
-                        ", Name: " + rs.getString("name") +
-                        ", Avatar: " + rs.getString("avatar"));
+    public static String getAvatarByEmail(String email) {
+        final String sql = "SELECT avatar FROM users WHERE email = ? LIMIT 1";
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:geoquest.db");
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getString("avatar");
             }
         } catch (SQLException e) {
-            System.err.println("Error while retrieving users: " + e.getMessage());
+            System.err.println("getAvatarByEmail error: " + e.getMessage());
         }
+        return null;
     }
+
 }

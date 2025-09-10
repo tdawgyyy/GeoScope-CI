@@ -29,7 +29,7 @@ public class UserProfile {
      * Constructs a new UserProfile with only name and avatar.
      * Use this for initial profile creation.
      */
-    public UserProfile(String explorerName, String avatar) {
+    public UserProfile(String explorerName, String avatar, String string, int level, String role) {
         this(explorerName, avatar, 0, 0); // Call the main constructor with default values
     }
 

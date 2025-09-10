@@ -28,22 +28,7 @@ public class MainAppController {
 
     @FXML
     public void initialize() {
-        // First, check for an existing user profile
-        UserProfile userProfile = DatabaseManager.getUserProfile();
 
-        if (userProfile != null) {
-            // If a profile exists, load the main content directly
-            this.explorerName = userProfile.getExplorerName();
-            this.selectedAvatar = userProfile.getAvatar();
-            loadHomePage();
-        } else {
-            // If no profile exists, load the profile creation scene
-            loadProfileCreationScene();
-        }
-
-        // Add these event handlers back
-        sideBarVBox.setOnMouseEntered(event -> expandSideBar());
-        sideBarVBox.setOnMouseExited(event -> collapseSideBar());
     }
 
     private void expandSideBar() {

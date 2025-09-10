@@ -2,15 +2,14 @@ package com.example.geoquestkidsexplorer.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-
+import javafx.scene.control.Label;
 
 public class HomePageController {
 
@@ -30,6 +29,7 @@ public class HomePageController {
     @FXML
     private Label levelsCompletedLabel;
 
+
     /**
      * Sets the profile data (name and avatar) on the dashboard.
      * This method is called by the MainController after the home page FXML is loaded.
@@ -46,48 +46,44 @@ public class HomePageController {
         perfectScoreLabel.setText("0");
         correctAnswerLabel.setText("100%");
         currentLevelLabel.setText("Current Level");
-        levelsCompletedLabel.setText("0/7");
+        levelsCompletedLabel.setText("0/54");
     }
 
     /**
      * Handles the "Start Your New Adventure!" button action.
      * Note: This method should be called from the HomePageController itself.
      */
+    @FXML
+    private void startNewAdventure(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                    "/com/example/geoquestkidsexplorer/country_image.fxml"));
+            Parent root = loader.load();
+
+            // Create a new stage for the country page
+            Stage countryStage = new Stage();
+            countryStage.setTitle("Country Page");
+            countryStage.setScene(new Scene(root, 600, 400));
+
+            // Get controller and pass data
+            CountryImageController controller = loader.getController();
+            controller.setCountry("Australia", countryStage); // Example country
+
+            countryStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     private void handleOceaniaClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/oceania.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Oceania");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Oceania has been clicked");
     }
-
-
 
     @FXML
     private void handleAntarcticaClick(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/antarctica.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle("Antarctica");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        System.out.println("Antarctica has been clicked");
     }
-
 
     @FXML
     private void handleSouthAmericaClick(ActionEvent event) {
@@ -113,6 +109,5 @@ public class HomePageController {
     private void handleAfricaClick(ActionEvent event) {
         System.out.println("Africa has been clicked");
     }
-
 
 }

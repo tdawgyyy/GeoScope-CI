@@ -14,7 +14,6 @@ public class MainApp extends Application {
     public void start(Stage stage) throws IOException {
         // This is the CRUCIAL first step. Create the database and table.
         DatabaseManager.createNewDatabase();
-        DatabaseManager.printAllUsers();
 
         // Corrected path to match the package name
         FXMLLoader fxmlLoader = new FXMLLoader(MainApp.class.getResource("loginview.fxml"));

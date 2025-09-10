@@ -100,7 +100,7 @@
     -fx-background-color: #ffffff;
     -fx-padding: 20px;
     -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 10, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 0);
     -fx-alignment: center-left;
 }
 
@@ -144,7 +144,7 @@
     -fx-background-radius: 10px;
     -fx-padding: 20px;
     -fx-alignment: center;
-    -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.1), 5, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 5, 0, 0, 0);
     -fx-spacing: 10;
 }
 
@@ -167,7 +167,7 @@
 
 /* Hover effect for tiles */
 .stat-tile:hover {
-    -fx-effect: dropshadow(three-pass-light, rgba(0,0,0,0.3), 10, 0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 10, 0, 0, 0);
     -fx-scale-y: 1.05;
     -fx-scale-x: 1.05;
 }
