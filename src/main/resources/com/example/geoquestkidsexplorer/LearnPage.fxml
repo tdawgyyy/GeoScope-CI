@@ -4,6 +4,8 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Button?>
+
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.example.geoquestkidsexplorer.controllers.LearnPageController"
@@ -26,4 +28,8 @@
         <RadioButton fx:id="radio4" text="Option 4"
                      style="-fx-font-size: 14px; -fx-text-fill: #c2185b; -fx-background-color: #f8bbd0; -fx-background-radius: 10; -fx-padding: 3 8 3 8;"/>
     </HBox>
+
+    <Button text="Back to Home"  onAction="#handleBackToHome"/>
+
+
 </VBox>
