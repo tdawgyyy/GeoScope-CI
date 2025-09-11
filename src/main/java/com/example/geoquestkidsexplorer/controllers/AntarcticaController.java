@@ -9,12 +9,23 @@ import javafx.scene.Node;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+
 public class AntarcticaController {
 
     @FXML
-    private void handleLearn(ActionEvent event) {
+    private void handleLearn(ActionEvent event) throws IOException {
         System.out.println("User chose to learn about Antarctica.");
-        // Optionally switch to a Learn page
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/LearnPage.fxml"));
+        Parent learnRoot = loader.load();
+
+        LearnPageController learnController = loader.getController();
+        learnController.setRegion("Antarctica");
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(learnRoot);
+        stage.setScene(scene);
+        stage.show();
     }
 
     @FXML
@@ -32,6 +43,9 @@ public class AntarcticaController {
         stage.getScene().setRoot(root);
         stage.show();
     }
+
+
+
 
 
 
