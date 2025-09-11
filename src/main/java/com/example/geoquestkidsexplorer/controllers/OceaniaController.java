@@ -25,9 +25,17 @@ public class OceaniaController {
     }
 
     @FXML
-    private void handleTest(ActionEvent event) {
-        System.out.println("User chose to test their knowledge of Oceania.");
-        // TODO: Navigate to Test page for Oceania
+    private void handleTest(ActionEvent event) throws IOException {
+        //System.out.println("User chose to test their knowledge of Oceania.");
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/testpage.fxml"));
+        Parent root = loader.load();
+
+        TestPageController controller = loader.getController();
+        controller.setRegion("Oceania");
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.show();
     }
 
 
@@ -37,7 +45,7 @@ public class OceaniaController {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
+        stage.getScene().setRoot(root);
         stage.show();
     }
 

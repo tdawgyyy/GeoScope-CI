@@ -85,7 +85,7 @@ public class HomePageController {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
+        stage.getScene().setRoot(root);
         stage.show();
     }
 
@@ -96,7 +96,9 @@ public class HomePageController {
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
+
+        // no resize, CSS stays the same
+        stage.getScene().setRoot(root);
         stage.show();
     }
 

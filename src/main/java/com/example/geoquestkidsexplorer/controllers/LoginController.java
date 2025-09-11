@@ -227,9 +227,9 @@ public class LoginController {
         HomePageController home = loader.getController();
         home.setProfileData(username, avatar);
 
-        s.setScene(new Scene(root,
-                s.getScene() != null ? s.getScene().getWidth()  : 1000,
-                s.getScene() != null ? s.getScene().getHeight() : 700));
+        s.getScene().setRoot(root);
+               // s.getScene() != null ? s.getScene().getWidth()  : 1000,
+               // s.getScene() != null ? s.getScene().getHeight() : 700));
         s.setTitle("GeoQuest – Home");
         s.show();
     }
