@@ -11,11 +11,13 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 
 
+
+
 public class TestPageController {
     public void setRegion(String region) {
-        Label regionLabel = new Label();
-        regionLabel.setText("Let's learn about "+ region);
+        regionLabel.setText("Let's test your knowledge on " + region);
     }
+
 
     // Return back to homepage
     @FXML
@@ -28,4 +30,11 @@ public class TestPageController {
         stage.setTitle("GeoScope - Home");
         stage.show();
     }
+
+    @FXML
+    private Label regionLabel;
+
+
+
+
 }

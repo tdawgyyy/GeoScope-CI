@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Node;
 
+
+
 public class LearnPageController {
 
     @FXML
@@ -17,6 +19,8 @@ public class LearnPageController {
 
     public void setRegion(String region) {
         regionLabel.setText("Let's learn about "+ region);
+
+
     }
 
     @FXML
@@ -28,6 +32,13 @@ public class LearnPageController {
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+
+
+
+
+
+
 
 
 }

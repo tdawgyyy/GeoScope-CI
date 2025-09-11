@@ -29,7 +29,11 @@
                      style="-fx-font-size: 14px; -fx-text-fill: #c2185b; -fx-background-color: #f8bbd0; -fx-background-radius: 10; -fx-padding: 3 8 3 8;"/>
     </HBox>
 
-    <Button text="Back to Home"  onAction="#handleBackToHome"/>
+    <Button text="Submit Answer" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+
+
+    <Button text="Back to Home"  onAction="#handleBackToHome" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
 
 
 </VBox>

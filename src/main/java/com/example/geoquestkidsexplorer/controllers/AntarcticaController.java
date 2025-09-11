@@ -29,10 +29,22 @@ public class AntarcticaController {
     }
 
     @FXML
-    private void handleTest(ActionEvent event) {
-        System.out.println("User chose to test their knowledge.");
-        // Optionally switch to a Test page
+    private void handleTest(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/testpage.fxml"));
+        Parent root = loader.load();
+
+        TestPageController controller = loader.getController();
+        controller.setRegion("Antarctica");
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
+
+
+
+
+
 
     @FXML
     private void handleBackToHome(ActionEvent event) throws IOException {

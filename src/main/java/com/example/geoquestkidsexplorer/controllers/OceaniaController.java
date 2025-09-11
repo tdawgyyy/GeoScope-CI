@@ -26,7 +26,6 @@ public class OceaniaController {
 
     @FXML
     private void handleTest(ActionEvent event) throws IOException {
-        //System.out.println("User chose to test their knowledge of Oceania.");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/testpage.fxml"));
         Parent root = loader.load();
 
