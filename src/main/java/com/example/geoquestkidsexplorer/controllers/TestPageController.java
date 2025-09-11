@@ -23,8 +23,8 @@ public class TestPageController {
         Parent root = FXMLLoader.load(getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        // Swap scene to existing homepage
-        stage.setScene(new Scene(root));
+        // Swap scene to existing homepage and keeping the same scene
+        stage.getScene().setRoot(root);
         stage.setTitle("GeoScope - Home");
         stage.show();
     }
