@@ -13,8 +13,12 @@
     <Label text="Would you like to:" style="-fx-font-size: 18px;" />
 
     <HBox spacing="20" alignment="CENTER">
-        <Button text="Learn" onAction="#handleLearn"/>
-        <Button text="Test Your Knowledge" onAction="#handleTest"/>
+        <Button text="Learn" onAction="#handleLearn" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+        <Button text="Test Your Knowledge" onAction="#handleTest" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
     </HBox>
+
+
+    <Button text="Back to Home" onAction="#handleBackToHome" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
 
 </VBox>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.geoquestkidsexplorer.controllers.LearnPageController"
+      alignment="CENTER" spacing="20.0">
+    <Label fx:id="regionLabel" text="Let's learn about..." style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+    <Label text="What Country is this?" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+
+
+    <HBox spacing="20" alignment="CENTER">
+        <RadioButton fx:id="radio1" text="Option 1"
+                     style="-fx-font-size: 14px; -fx-text-fill: #c2185b; -fx-background-color: #f8bbd0; -fx-background-radius: 10; -fx-padding: 3 8 3 8;"/>
+        <RadioButton fx:id="radio2" text="Option 2"
+                     style="-fx-font-size: 14px; -fx-text-fill: #c2185b; -fx-background-color: #f8bbd0; -fx-background-radius: 10; -fx-padding: 3 8 3 8;"/>
+    </HBox>
+
+    <HBox spacing="20" alignment="CENTER">
+        <RadioButton fx:id="radio3" text="Option 3"
+                     style="-fx-font-size: 14px; -fx-text-fill: #c2185b; -fx-background-color: #f8bbd0; -fx-background-radius: 10; -fx-padding: 3 8 3 8;"/>
+        <RadioButton fx:id="radio4" text="Option 4"
+                     style="-fx-font-size: 14px; -fx-text-fill: #c2185b; -fx-background-color: #f8bbd0; -fx-background-radius: 10; -fx-padding: 3 8 3 8;"/>
+    </HBox>
+</VBox>
