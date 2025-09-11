@@ -12,9 +12,16 @@ import java.io.IOException;
 public class OceaniaController {
 
     @FXML
-    private void handleLearn(ActionEvent event) {
-        System.out.println("User chose to learn about Oceania.");
-        // TODO: Navigate to Learn page for Oceania
+    private void handleLearn(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/LearnPage.fxml"));
+        Parent root = loader.load();
+
+        LearnPageController controller = loader.getController();
+        controller.setRegion("Oceania");
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 
     @FXML
