@@ -3,6 +3,7 @@ package com.example.geoquestkidsexplorer.controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -76,7 +77,20 @@ public class HomePageController {
     }
 
     @FXML
-    private void handleOceaniaClick(ActionEvent event) {
+    private void handleOceaniaClick(ActionEvent event) throws IOException{
+
+        // Add navigation to open oceania.fxml
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/geoquestkidsexplorer/oceania.fxml"));
+        Stage s = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root,
+                s.getScene() != null ? s.getScene().getWidth() : 1200,
+                s.getScene() != null ? s.getScene().getHeight() : 800);
+
+        scene.getStylesheets().add(
+                com.example.geoquestkidsexplorer.MainApp.class.getResource("style.css").toExternalForm());
+        s.setScene(scene);
+        s.setTitle("GeoScope - Oceania");
+        s.show();
         System.out.println("Oceania has been clicked");
     }
 
