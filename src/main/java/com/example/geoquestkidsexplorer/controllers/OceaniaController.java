@@ -37,6 +37,20 @@ public class OceaniaController {
         stage.show();
     }
 
+    @FXML
+    private void handleFlashcards(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/FlashcardsPage.fxml"));
+        Parent root = loader.load();
+
+        FlashcardsController controller = loader.getController();
+        controller.setRegion("Oceania");  // Pass the selected region dynamically here
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.show();
+    }
+
+
 
     @FXML
     private void handleBackToHome(ActionEvent event) throws IOException {

@@ -9,15 +9,19 @@
       fx:controller="com.example.geoquestkidsexplorer.controllers.AntarcticaController">
 
     <Label text="Welcome to Antarctica!" style="-fx-font-size: 24px;" />
-
     <Label text="Would you like to:" style="-fx-font-size: 18px;" />
 
     <HBox spacing="20" alignment="CENTER">
-        <Button text="Learn" onAction="#handleLearn" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
-        <Button text="Test Your Knowledge" onAction="#handleTest" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+        <Button text="Learn" onAction="#handleLearn"
+                style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;" />
+        <Button text="Test Your Knowledge" onAction="#handleTest"
+                style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;" />
     </HBox>
 
-    <Button text="Back to Home" onAction="#handleBackToHome" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+    <Button text="Flashcards" onAction="#handleFlashcards"
+            style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;" />
 
-
+    <Button text="Back to Home" onAction="#handleBackToHome"
+            style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;" />
 </VBox>
+

@@ -41,6 +41,20 @@ public class AntarcticaController {
         stage.show();
     }
 
+    @FXML
+    private void handleFlashcards(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/FlashcardsPage.fxml"));
+        Parent flashcardRoot = loader.load();
+
+        FlashcardsController controller = loader.getController();
+        controller.setRegion("Antarctica");
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(flashcardRoot);
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
 
 
