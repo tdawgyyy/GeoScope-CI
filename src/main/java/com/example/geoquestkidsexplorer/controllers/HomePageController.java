@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.scene.Node;
 
 import java.io.IOException;
 import javafx.scene.control.Label;
@@ -75,15 +76,31 @@ public class HomePageController {
         }
     }
 
-    @FXML
-    private void handleOceaniaClick(ActionEvent event) {
-        System.out.println("Oceania has been clicked");
-    }
 
     @FXML
-    private void handleAntarcticaClick(ActionEvent event) {
-        System.out.println("Antarctica has been clicked");
+    private void handleOceaniaClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/geoquestkidsexplorer/oceania.fxml"
+        ));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
     }
+
+
+    @FXML
+    private void handleAntarcticaClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/antarctica.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+
 
     @FXML
     private void handleSouthAmericaClick(ActionEvent event) {
