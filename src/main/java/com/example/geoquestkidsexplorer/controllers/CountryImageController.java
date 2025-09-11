@@ -13,6 +13,7 @@ public class CountryImageController {
     @FXML private Label countryNameLabel;
     @FXML private ImageView countryImageView;
 
+
     private Stage stage;
 
     // Called by the parent controller when opening this page
