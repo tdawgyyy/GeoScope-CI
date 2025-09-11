@@ -17,4 +17,7 @@
         <Button text="Test Your Knowledge" onAction="#handleTest"/>
     </HBox>
 
+    <Button text="Back to Home" onAction="#handleBackToHome"/>
+
+
 </VBox>
