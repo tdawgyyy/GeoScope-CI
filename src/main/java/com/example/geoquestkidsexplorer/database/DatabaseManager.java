@@ -257,5 +257,49 @@ public class DatabaseManager {
         }
         return null;
     }
+//For Quiz mode
+
+    public static class CountryQuestion {
+        public final String countryName;
+        public final Image image;          // JavaFX image to show
+        public CountryQuestion(String countryName, Image image) {
+            this.countryName = countryName;
+            this.image = image;
+        }
+    }
+
+    /** Get a random country+image from a given continent. */
+    public static CountryQuestion getRandomCountryByContinent(String continent) {
+        final String sql = """
+        SELECT country, country_picture
+        FROM countries
+        WHERE continent = ?
+        ORDER BY RANDOM()
+        LIMIT 1
+        """;
+        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            enableForeignKeys(conn);
+            ps.setString(1, continent);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String country = rs.getString("country");
+                    byte[] bytes = rs.getBytes("country_picture");
+                    Image img = (bytes != null && bytes.length > 0)
+                            ? new Image(new ByteArrayInputStream(bytes))
+                            : null;
+                    return new CountryQuestion(country, img);
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("getRandomCountryByContinent error: " + e.getMessage());
+        }
+        return null;
+    }
+
+    /** Optional: normalize strings for answer checking (basic). */
+    public static String normalize(String s) {
+        return s == null ? "" : s.trim().toLowerCase();
+    }
 
 }

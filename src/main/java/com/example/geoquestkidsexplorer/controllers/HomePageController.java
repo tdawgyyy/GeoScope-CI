@@ -54,26 +54,31 @@ public class HomePageController {
      * Handles the "Start Your New Adventure!" button action.
      * Note: This method should be called from the HomePageController itself.
      */
-    @FXML
-    private void startNewAdventure(ActionEvent event) {
+    private void openQuiz(String continent) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                    "/com/example/geoquestkidsexplorer/country_image.fxml"));
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/com/example/geoquestkidsexplorer/quiz_view.fxml"));
             Parent root = loader.load();
 
-            // Create a new stage for the country page
-            Stage countryStage = new Stage();
-            countryStage.setTitle("Country Page");
-            countryStage.setScene(new Scene(root, 600, 400));
+            // Show quiz in a new window (keeps Home open)
+            Stage quizStage = new Stage();
+            quizStage.setTitle(continent + " Quiz");
+            quizStage.setScene(new Scene(root, 800, 600));
 
-            // Get controller and pass data
-            CountryImageController controller = loader.getController();
-            controller.setCountry("Australia", countryStage); // Example country
+            // Pass data into the quiz controller
+            QuizController controller = loader.getController();
+            controller.setStage(quizStage);       // so Back can close this window
+            controller.setContinent(continent);   // loads the first question
 
-            countryStage.show();
+            quizStage.show();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void startNewAdventure(ActionEvent event) {
+        openQuiz("Oceania"); // or choose based on the user’s level/last choice
     }
 
 
