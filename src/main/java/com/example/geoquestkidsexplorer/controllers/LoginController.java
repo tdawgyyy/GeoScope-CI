@@ -145,29 +145,20 @@ public class LoginController {
         String role     = roleCombo == null ? "" : String.valueOf(roleCombo.getValue());
         String password = text(registerPasswordField);
         String confirm  = text(confirmPasswordField);
-
         String avatarDisplay = (avatarCombo == null) ? null : avatarCombo.getValue();
 
-        // Extract emoji from the display string (everything before the first space)
-        String avatarEmoji = null;
-        if (avatarDisplay != null && !avatarDisplay.isBlank()) {
-            int idx = avatarDisplay.indexOf(' ');
-            avatarEmoji = (idx > 0) ? avatarDisplay.substring(0, idx) : avatarDisplay;
+        //Using the single public validator
+        String err = validateRegistrationInputs(username, email, role, password, confirm, avatarDisplay);
+        if (err != null){
+            error(err);
+            return;
         }
 
-        // Basic validation
-        if (username.isBlank() || email.isBlank() || role.isBlank() || password.isBlank() || confirm.isBlank()) {
-            error("Please fill in all fields.");
-            return;
-        }
-        if (!password.equals(confirm)) {
-            error("Passwords do not match.");
-            return;
-        }
-        if (avatarEmoji == null || avatarEmoji.isBlank()) {
-            error("Please pick an avatar.");
-            return;
-        }
+        // Extract emoji from the display string (everything before the first space)
+        // Tori here - I just created your avatarEmoji into a method that is all :)
+        // The method you had is in helper below :)
+
+        String avatarEmoji = extractAvatarEmoji(avatarDisplay);
 
         try {
             // Duplicate check
@@ -273,6 +264,12 @@ public class LoginController {
     // ===========================
     private static String text(TextField tf) {
         return (tf == null || tf.getText() == null) ? "" : tf.getText().trim();
+    }
+
+    private static String extractAvatarEmoji(String avatarDisplay){
+        if(avatarDisplay == null || avatarDisplay.isBlank()) return "";
+        int idx = avatarDisplay.indexOf(' ');
+        return (idx > 0) ? avatarDisplay.substring(0, idx) : avatarDisplay;
     }
 
     private void clearRegisterFields() {
