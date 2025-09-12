@@ -225,12 +225,12 @@ public class LoginController {
         Parent root = loader.load();
 
         MainAppController main = loader.getController();      // was HomePageController
-        main.setProfileData(username, avatar);                // keep if your controller supports it
+        main.setProfileData(username, avatar);
 
         if (s.getScene() == null) s.setScene(new Scene(root, 1000, 700));
         else s.getScene().setRoot(root);
 
-        s.setTitle("GeoQuest – Main");                       // optional: update title
+        s.setTitle("GeoQuest – Main");
         s.show();
     }
 
