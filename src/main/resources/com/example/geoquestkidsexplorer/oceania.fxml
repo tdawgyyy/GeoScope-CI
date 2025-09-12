@@ -17,6 +17,10 @@
         <Button text="Test Your Knowledge" onAction="#handleTest" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
     </HBox>
 
+    <Button fx:id="flashcardsButton" text="Flashcards" onAction="#handleFlashcards"
+            style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
+
+
 
     <Button text="Back to Home" onAction="#handleBackToHome" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
 

@@ -47,7 +47,7 @@ public class HomePageController {
         perfectScoreLabel.setText("0");
         correctAnswerLabel.setText("100%");
         currentLevelLabel.setText("Current Level");
-        levelsCompletedLabel.setText("0/54");
+        levelsCompletedLabel.setText("0/7");
     }
 
     /**

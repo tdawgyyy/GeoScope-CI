@@ -13,11 +13,16 @@
       prefHeight="400.0" prefWidth="600.0"
       style="-fx -background-color: white;">
     <children>
-        <Label text="Test-Blank Screen" style="-fx-font-size: 28px; -fx-font-weight: bold;"/>
-        <Label text="Placeholder content for the Test Page" style="-fx-font-size: 16px;"/>
+        <Label fx:id="regionLabel" text="Let's test your knowledge on..." style="-fx-font-size: 36px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+        <Label text="What Country is this?" style="-fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: #333333;" />
+
+        <TextField fx:id="userInputField" promptText="Enter your answer here" prefWidth="50" prefHeight="30" />
+
     </children>
     <padding><Insets top="40" right="40" bottom="40" left="40"/></padding>
 
-    <Button text="Back to Home" onAction="#handleBackToHome"/>
+    <Button text="Submit Answer!" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"   />
+
+    <Button text="Back to Home" onAction="#handleBackToHome" style="-fx-background-color: #ffcdd2; -fx-background-radius: 10; -fx-padding: 12; -fx-text-fill: #000000; -fx-font-size: 14px; -fx-font-weight: bold;"/>
 
 </VBox>
