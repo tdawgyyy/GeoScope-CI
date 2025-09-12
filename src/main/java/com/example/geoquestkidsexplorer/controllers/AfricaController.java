@@ -16,7 +16,7 @@ public class AfricaController {
     private void backToContinents(ActionEvent event) {
         try {
             // Load the StartAdventure.fxml file
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/geoquestkidsexplorer/mainapp.fxml"));
             Scene scene = new Scene(root);
 
             // Get the current stage and set the new scene

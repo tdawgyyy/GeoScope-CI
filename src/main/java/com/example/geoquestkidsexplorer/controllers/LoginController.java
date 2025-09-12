@@ -221,16 +221,16 @@ public class LoginController {
         Stage s = (stage != null) ? stage : deriveStage(event);
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml"));
+                getClass().getResource("/com/example/geoquestkidsexplorer/mainapp.fxml")); // was homepage.fxml
         Parent root = loader.load();
 
-        HomePageController home = loader.getController();
-        home.setProfileData(username, avatar);
+        MainAppController main = loader.getController();      // was HomePageController
+        main.setProfileData(username, avatar);                // keep if your controller supports it
 
-        s.getScene().setRoot(root);
-               // s.getScene() != null ? s.getScene().getWidth()  : 1000,
-               // s.getScene() != null ? s.getScene().getHeight() : 700));
-        s.setTitle("GeoQuest – Home");
+        if (s.getScene() == null) s.setScene(new Scene(root, 1000, 700));
+        else s.getScene().setRoot(root);
+
+        s.setTitle("GeoQuest – Main");                       // optional: update title
         s.show();
     }
 

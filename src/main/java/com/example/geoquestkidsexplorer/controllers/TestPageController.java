@@ -22,7 +22,7 @@ public class TestPageController {
     // Return back to homepage
     @FXML
     private void handleBackToHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/com/example/geoquestkidsexplorer/mainapp.fxml"));
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         // Swap scene to existing homepage and keeping the same scene
