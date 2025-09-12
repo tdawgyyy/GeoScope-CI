@@ -97,7 +97,21 @@ public class HomePageController {
 
     @FXML
     private void handleAntarcticaClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/antarctica.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/geoquestkidsexplorer/antarctica.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+        // no resize, CSS stays the same
+        stage.getScene().setRoot(root);
+        stage.show();
+    }
+
+    @FXML
+    private void handleAfricaClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(
+                "/com/example/geoquestkidsexplorer/africa.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -129,9 +143,9 @@ public class HomePageController {
         System.out.println("Asia has been clicked");
     }
 
-    @FXML
+    /*@FXML
     private void handleAfricaClick(ActionEvent event) {
         System.out.println("Africa has been clicked");
-    }
+    }*/
 
 }

@@ -69,11 +69,4 @@ public class AntarcticaController {
         stage.getScene().setRoot(root);
         stage.show();
     }
-
-
-
-
-
-
-
 }
