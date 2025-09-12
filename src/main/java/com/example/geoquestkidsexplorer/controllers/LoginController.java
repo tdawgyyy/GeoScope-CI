@@ -138,6 +138,8 @@ public class LoginController {
     // ===========================
     @FXML
     private void handleRegister(ActionEvent event) {
+        // TODO: Deduplicate by delegating to validateRegistrationInputs so whatever is tweaked here, do the same there.
+
         String username = text(registerUsernameField);
         String email    = text(registerEmailField);
         String role     = roleCombo == null ? "" : String.valueOf(roleCombo.getValue());
@@ -211,7 +213,6 @@ public class LoginController {
         }
         return null;
     }
-
 
     // ===========================
     // Switchers
