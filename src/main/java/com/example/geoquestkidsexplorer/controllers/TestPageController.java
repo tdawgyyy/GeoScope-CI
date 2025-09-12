@@ -27,7 +27,7 @@ public class TestPageController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         // Swap scene to existing homepage and keeping the same scene
         stage.getScene().setRoot(root);
-        stage.setTitle("GeoScope - Home");
+        stage.setTitle("GeoScope - HomePage");
         stage.show();
     }
 
