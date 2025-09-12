@@ -44,7 +44,6 @@
                 </VBox>
             </children>
         </HBox>
-
         <!-- Continents as Uniform Cards -->
         <TilePane fx:id="continentPane"
                   alignment="CENTER"
@@ -214,7 +213,6 @@
         </TilePane>
 
 
-
         <HBox alignment="CENTER" spacing="20.0">
             <children>
                 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0" spacing="10.0"
@@ -271,10 +269,10 @@
                 </VBox>
             </children>
         </HBox>
-
         <Button text="Start Your Adventure!"
                 onAction="#startNewAdventure"
                 prefWidth="220"
                 style="-fx-background-color: #4caf50; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;" />
-    </children>
+
+        </children>
 </VBox>
