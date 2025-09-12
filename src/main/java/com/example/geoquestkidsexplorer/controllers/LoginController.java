@@ -187,6 +187,32 @@ public class LoginController {
         }
     }
 
+    /* FOR REGISTRATION VALIDATION UNIT TESTING -------
+    * In order to pull and extract data
+    * Makes future testing much easier
+    * */
+    public String validateRegistrationInputs(String username, String email, String role,
+                                             String password, String confirm, String avatarDisplay){
+        if (username.isBlank() || email.isBlank() || role.isBlank() || password.isBlank() || confirm.isBlank()) {
+            return "Please fill in all the fields";
+        }
+        if (!password.equals(confirm)) {
+            error("Passwords do not match.");
+            return "Passwords do not match";
+        }
+        // Extract Emoji same way up
+        String avatarEmoji =null;
+        if(avatarDisplay != null && !avatarDisplay.isBlank()){
+            int idx = avatarDisplay.indexOf(' ');
+            avatarEmoji = (idx > 0)? avatarDisplay.substring(0, idx) : avatarDisplay;
+        }
+        if (avatarEmoji == null || avatarEmoji.isBlank()) {
+            return "Please pick an avatar";
+        }
+        return null;
+    }
+
+
     // ===========================
     // Switchers
     // ===========================
