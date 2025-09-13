@@ -1,5 +1,6 @@
 package com.example.geoquestkidsexplorer.controllers;
 
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -54,56 +55,19 @@ public class AntarcticaController {
         }
     }
 
-    /*@FXML
-    private void handleLearn(ActionEvent event) throws IOException {
-        System.out.println("User chose to learn about Antarctica.");
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/LearnPage.fxml"));
-        Parent learnRoot = loader.load();
-
-        LearnPageController learnController = loader.getController();
-        learnController.setRegion("Antarctica");
-
+    /**
+     * A private helper method to load a new FXML scene and transition to it.
+     * This version is more flexible and can accept any type of Event.
+     *
+     * @param fxmlPath The path to the FXML file to load.
+     * @param event The event that triggered the action.
+     * @throws IOException If the FXML file cannot be loaded.
+     */
+    private void loadScene(String fxmlPath, Event event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+        Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(learnRoot);
         stage.setScene(scene);
         stage.show();
     }
-
-    @FXML
-    private void handleTest(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/testpage.fxml"));
-        Parent root = loader.load();
-
-        TestPageController controller = loader.getController();
-        controller.setRegion("Antarctica");
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setScene(new Scene(root));
-        stage.show();
-    }
-
-    @FXML
-    private void handleFlashcards(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/FlashcardsPage.fxml"));
-        Parent flashcardRoot = loader.load();
-
-        FlashcardsController controller = loader.getController();
-        controller.setRegion("Antarctica");
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(flashcardRoot);
-        stage.setScene(scene);
-        stage.show();
-    }*/
-
-    /*@FXML
-    private void handleBackToHome(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml"));
-        Parent root = loader.load();
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.getScene().setRoot(root);
-        stage.show();
-    }*/
 }

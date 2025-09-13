@@ -1,6 +1,7 @@
 package com.example.geoquestkidsexplorer.controllers;
 
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -51,6 +52,22 @@ public class AfricaController {
             System.out.println("Test Mode Quiz selected!");
             // TODO: Implement logic to start the Test Mode Quiz
         }
+    }
+
+    /**
+     * A private helper method to load a new FXML scene and transition to it.
+     * This version is more flexible and can accept any type of Event.
+     *
+     * @param fxmlPath The path to the FXML file to load.
+     * @param event The event that triggered the action.
+     * @throws IOException If the FXML file cannot be loaded.
+     */
+    private void loadScene(String fxmlPath, Event event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
+        Scene scene = new Scene(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(scene);
+        stage.show();
     }
 
 }

@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 
 <BorderPane prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.geoquestkidsexplorer.controllers.AsiaController">
+            fx:controller="com.example.geoquestkidsexplorer.controllers.NorthAmericaController">
     <!-- Top: Navigation Bar -->
     <top>
         <HBox alignment="CENTER_LEFT" prefHeight="65.0" style="-fx-background-color: #3b82f6; -fx-padding: 10 100;">
@@ -21,7 +21,7 @@
                      -fx-effect: dropshadow(two-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 0);" text="⬅️ Back to Continents" />
                 <Label alignment="CENTER_LEFT" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 24px;
                 -fx-padding: 0 0 0 10px;"
-                       text="Asia" />
+                       text="North America" />
                 <Region HBox.hgrow="ALWAYS" />
             </children>
         </HBox>
