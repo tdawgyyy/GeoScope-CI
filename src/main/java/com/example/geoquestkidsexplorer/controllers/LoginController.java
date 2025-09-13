@@ -266,6 +266,8 @@ public class LoginController {
         return (tf == null || tf.getText() == null) ? "" : tf.getText().trim();
     }
 
+
+// Input the extractAvatarEmoji into a method
     private static String extractAvatarEmoji(String avatarDisplay){
         if(avatarDisplay == null || avatarDisplay.isBlank()) return "";
         int idx = avatarDisplay.indexOf(' ');
