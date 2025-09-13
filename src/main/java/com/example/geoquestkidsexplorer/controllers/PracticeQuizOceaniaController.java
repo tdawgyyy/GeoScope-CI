@@ -1,6 +1,7 @@
 package com.example.geoquestkidsexplorer.controllers;
 
 import com.example.geoquestkidsexplorer.data.AfricaQuizData;
+import com.example.geoquestkidsexplorer.data.OceaniaQuizData;
 import com.example.geoquestkidsexplorer.models.QuizQuestions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
-public class PracticeQuizAfricaController {
+public class PracticeQuizOceaniaController {
 
     public static record EvalResult(boolean correct, int scoreDelta, String correctAnswer, String funFact){}
 
@@ -42,7 +43,7 @@ public class PracticeQuizAfricaController {
 
     @FXML
     public void initialize() {
-        questions = AfricaQuizData.getPracticeQuestions();
+        questions = OceaniaQuizData.getPracticeQuestions();
         Collections.shuffle(questions);
 
         answerToggleGroup = new ToggleGroup();
@@ -164,7 +165,7 @@ public class PracticeQuizAfricaController {
     @FXML
     private void backToGameModes(ActionEvent event) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/com/example/geoquestkidsexplorer/africa.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/com/example/geoquestkidsexplorer/oceania.fxml"));
             Scene scene = new Scene(root);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

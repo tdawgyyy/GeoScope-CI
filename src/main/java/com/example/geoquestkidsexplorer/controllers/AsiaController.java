@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AfricaController {
+public class AsiaController {
     @FXML
     private void backToContinents(ActionEvent event) {
         try {
@@ -39,7 +39,7 @@ public class AfricaController {
             try {
                 // Load the practice quiz FXML file
                 Parent root = FXMLLoader.load(getClass().getResource(
-                        "/com/example/geoquestkidsexplorer/practicequizafrica.fxml"));
+                        "/com/example/geoquestkidsexplorer/practicequizasia.fxml"));
                 Scene scene = new Scene(root);
                 Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                 stage.setScene(scene);
