@@ -43,6 +43,7 @@ public class OceaniaController {
             } else if ("testModeTile".equals(tileId)) {
                 System.out.println("Test Mode Quiz selected!");
                 //loadScene("/com/example/geoquestkidsexplorer/quiz_view.fxml", event);
+                //Note: Nikki this is an example reference on how you can link your test quiz page for other continent
                 openQuiz("Oceania");
             }
         } catch (IOException e) {
@@ -50,10 +51,12 @@ public class OceaniaController {
         }
     }
 
+    //Note: this is Aaliyah's method reference on how you can link your .fxml page for your test quiz pages for other countries.
+    //Always create this method to other continent controller and adjust the name refences to call your correct .fxml for the continent.
     private void openQuiz(String continent) {
         try {
             FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/com/example/geoquestkidsexplorer/quiz_view.fxml"));
+                    getClass().getResource("/com/example/geoquestkidsexplorer/quiz_view.fxml")); //For Oceania, it quiz_view.fxml
             Parent root = loader.load();
 
             // Show quiz in a new window (keeps Home open)
