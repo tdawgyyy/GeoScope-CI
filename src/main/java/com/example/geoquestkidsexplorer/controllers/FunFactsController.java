@@ -12,6 +12,9 @@ import java.io.IOException;
 
 public class FunFactsController {
 
+    /*@FXML
+    private SidebarController mySidebarController; // The fx:id from the include tag*/
+
     /**
      * Handles the "Back to Dashboards" button action.
      * This method will transition the user back to the home page by loading
@@ -22,9 +25,10 @@ public class FunFactsController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml"));
         Parent root = loader.load();
 
-        // Get the current stage and set the new root as the scene's content
-        Scene scene = ((Node) event.getSource()).getScene();
-        scene.setRoot(root);
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
 
