@@ -55,16 +55,14 @@ public class PracticeQuizAfricaController {
     public EvalResult evaluateSelection(String selectedAnswer, QuizQuestions q){
         if(q == null) return new EvalResult(false, 0, "", "");
         String correct = q.getCorrectAnswer();
-        String fact = q.getFunFact() == null? "": q.getFunFact();
-        boolean isCorrect = selectedAnswer != null && selectedAnswer.equals(correct);
+        String fact = q.getFunFact() == null ? "": q.getFunFact();
+
+        String selected = selectedAnswer == null ? null : selectedAnswer.trim();
+        boolean isCorrect = selected != null && correct != null && selected.equalsIgnoreCase(correct.trim());
+
         int delta = isCorrect ? 1 : 0;
         return new EvalResult(isCorrect, delta, correct, fact);
     }
-    // Helper for testing
-    public static String formatCounter(int index0Based, int total){
-        return String.format("Question %d of %d", index0Based + 1, total);
-    }
-    //--------------------
 
     private void loadQuestion() {
         if (currentQuestionIndex < questions.size()) {

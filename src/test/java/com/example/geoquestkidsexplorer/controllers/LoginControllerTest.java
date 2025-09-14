@@ -48,6 +48,7 @@ class LoginControllerTest {
     }
 
     //Asserts when an object is null when all inputs are valid
+    //If everything is filled in correctly , the system does not complain
     @Test
     void returnsNullWhenAllInputsValid(){
         String error = controller.validateRegistrationInputs(
