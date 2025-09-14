@@ -10,6 +10,8 @@ import com.example.geoquestkidsexplorer.database.DatabaseManager;
 import java.io.IOException;
 
 public class MainApp extends Application {
+
+
     @Override
     public void start(Stage stage) throws IOException {
         // This is the CRUCIAL first step. Create the database and table.

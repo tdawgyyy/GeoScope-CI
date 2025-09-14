@@ -1,19 +1,18 @@
 package com.example.geoquestkidsexplorer.controllers;
 
+import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class AntarcticaController {
-
+public class NorthAmericaController {
     @FXML
     private void backToContinents(ActionEvent event) {
         try {
@@ -64,17 +63,4 @@ public class AntarcticaController {
         stage.show();
     }
 
-    @FXML
-    private void handleFlashcards(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/FlashcardsPage.fxml"));
-        Parent flashcardRoot = loader.load();
-
-        FlashcardsController controller = loader.getController();
-        controller.setRegion("Antarctica");
-
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(flashcardRoot);
-        stage.setScene(scene);
-        stage.show();
-    }
 }

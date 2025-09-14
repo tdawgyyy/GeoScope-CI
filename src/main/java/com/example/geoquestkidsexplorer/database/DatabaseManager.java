@@ -1,8 +1,12 @@
 package com.example.geoquestkidsexplorer.database;
 
+import com.example.geoquestkidsexplorer.models.PracticeQuizQuestions;
 import com.example.geoquestkidsexplorer.models.UserProfile;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.io.ByteArrayInputStream;
 import java.sql.*;
 import javafx.scene.image.Image;
@@ -300,6 +304,59 @@ public class DatabaseManager {
     /** Optional: normalize strings for answer checking (basic). */
     public static String normalize(String s) {
         return s == null ? "" : s.trim().toLowerCase();
+    }
+
+//---------------------------------------------------------------------------------------------------
+//Note: Added for Practice Mode Quiz with country images. GLENDA
+
+    // This method will generate a complete quiz question with an image and multiple-choice options.
+    public static PracticeQuizQuestions getPracticeQuizQuestion(String continent) {
+        //Get the correct country and its image for the question
+        CountryQuestion correctQuestion = getRandomCountryByContinent(continent);
+
+        if (correctQuestion == null) {
+            return null; // No countries found
+        }
+
+        String correctAnswer = correctQuestion.countryName;
+        Image countryImage = correctQuestion.image;
+
+        //Get 3 random incorrect country names to use as distractors
+        List<String> choices = getNRandomCountriesByContinent(continent, 3, correctAnswer);
+
+        //Add the correct answer to the list of choices
+        choices.add(correctAnswer);
+        Collections.shuffle(choices); // Randomize the order of all 4 choices
+
+        //(Optional) Create a simple question text and fun fact.
+        // You can hard-code a generic question or use a more sophisticated method.
+        String questionText = "Which country is this?";
+        String funFact = "This is " + correctAnswer + ". A cool fact about this country is that its flag has a unique design.";
+
+        return new PracticeQuizQuestions(questionText, choices, correctAnswer, funFact, countryImage);
+    }
+
+    /** Gets a list of N random country names from a given continent.
+     * Excludes the given 'exclude' country name if provided.
+     */
+    public static List<String> getNRandomCountriesByContinent(String continent, int limit, String exclude) {
+        List<String> countries = new ArrayList<>();
+        // The `AND country != ?` part handles the exclusion of the correct answer.
+        String sql = "SELECT country FROM countries WHERE continent = ? AND country != ? ORDER BY RANDOM() LIMIT ?";
+        try (Connection conn = DriverManager.getConnection(DATABASE_URL);
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, continent);
+            ps.setString(2, exclude);
+            ps.setInt(3, limit);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    countries.add(rs.getString("country"));
+                }
+            }
+        } catch (SQLException e) {
+            System.err.println("getNRandomCountriesByContinent error: " + e.getMessage());
+        }
+        return countries; // Returns the list, even if it's empty
     }
 
 }

@@ -84,11 +84,9 @@ public class HomePageController {
 
     @FXML
     private void handleOceaniaClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "/com/example/geoquestkidsexplorer/oceania.fxml"
-        ));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource(
+                "/com/example/geoquestkidsexplorer/oceania.fxml")));
         Parent root = loader.load();
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
         stage.show();
@@ -97,12 +95,10 @@ public class HomePageController {
 
     @FXML
     private void handleAntarcticaClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "/com/example/geoquestkidsexplorer/antarctica.fxml"));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource(
+                "/com/example/geoquestkidsexplorer/antarctica.fxml")));
         Parent root = loader.load();
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         // no resize, CSS stays the same
         stage.getScene().setRoot(root);
         stage.show();
@@ -110,42 +106,56 @@ public class HomePageController {
 
     @FXML
     private void handleAfricaClick(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(
-                "/com/example/geoquestkidsexplorer/africa.fxml"));
+        FXMLLoader loader = new FXMLLoader((getClass().getResource(
+                "/com/example/geoquestkidsexplorer/africa.fxml")));
         Parent root = loader.load();
-
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
         // no resize, CSS stays the same
         stage.getScene().setRoot(root);
         stage.show();
     }
 
-
+    @FXML
+    private void handleAsiaClick(ActionEvent event) throws  IOException {
+        FXMLLoader loader = new FXMLLoader((getClass().getResource(
+                "/com/example/geoquestkidsexplorer/asia.fxml")));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.show();
+    }
 
     @FXML
-    private void handleSouthAmericaClick(ActionEvent event) {
+    private void handleSouthAmericaClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader((getClass().getResource(
+                "/com/example/geoquestkidsexplorer/southamerica.fxml")));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.show();
         System.out.println("South America has been clicked");
     }
 
     @FXML
-    private void handleNorthAmericaClick(ActionEvent event) {
+    private void handleNorthAmericaClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader((getClass().getResource(
+            "/com/example/geoquestkidsexplorer/northamerica.fxml" )));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.show();
         System.out.println("North America has been clicked");
     }
 
     @FXML
-    private void handleEuropeClick(ActionEvent event) {
+    private void handleEuropeClick(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader ((getClass().getResource(
+                "/com/example/geoquestkidsexplorer/europe.fxml")));
+        Parent root = loader.load();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.getScene().setRoot(root);
+        stage.show();
         System.out.println("Europe has been clicked");
     }
-
-    @FXML
-    private void handleAsiaClick(ActionEvent event) {
-        System.out.println("Asia has been clicked");
-    }
-
-    /*@FXML
-    private void handleAfricaClick(ActionEvent event) {
-        System.out.println("Africa has been clicked");
-    }*/
 
 }
