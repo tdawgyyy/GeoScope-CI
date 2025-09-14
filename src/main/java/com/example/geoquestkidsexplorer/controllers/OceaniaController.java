@@ -88,8 +88,6 @@ public class OceaniaController {
         stage.show();
     }
 
-
-
     /**
      * A private helper method to load a new FXML scene and transition to it.
      * This version is more flexible and can accept any type of Event.

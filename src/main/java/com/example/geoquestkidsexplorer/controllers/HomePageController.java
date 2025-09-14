@@ -150,7 +150,7 @@ public class HomePageController {
     @FXML
     private void handleEuropeClick(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader ((getClass().getResource(
-                "/com/example/geoquestkidsexplorer/europe/fxml")));
+                "/com/example/geoquestkidsexplorer/europe.fxml")));
         Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);

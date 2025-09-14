@@ -31,26 +31,19 @@ public class AsiaController {
 
     @FXML
     private void handleGameModeClick(MouseEvent event) {
-        // Get the source of the click, which is the VBox tile
+        // Get the source of the click, which is the VBox tile.
         Node clickedTile = (Node) event.getSource();
         String tileId = clickedTile.getId();
 
-        // Use the ID to determine which game mode was selected
-        if ("practiceModeTile".equals(tileId)) {
-            try {
-                // Load the practice quiz FXML file
-                Parent root = FXMLLoader.load(getClass().getResource(
-                        "/com/example/geoquestkidsexplorer/practicequizasia.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException e) {
-                e.printStackTrace();
+        try {
+            // Use the ID to determine which game mode was selected and load the corresponding scene.
+            if ("practiceModeTile".equals(tileId)) {
+                loadScene("/com/example/geoquestkidsexplorer/practicequizoceania.fxml", event);
+            } else if ("testModeTile".equals(tileId)) {
+                System.out.println("Test Mode Quiz selected!");
             }
-        } else if ("testModeTile".equals(tileId)) {
-            System.out.println("Test Mode Quiz selected!");
-            // TODO: Implement logic to start the Test Mode Quiz
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
