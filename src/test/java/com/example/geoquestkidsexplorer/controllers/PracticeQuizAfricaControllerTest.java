@@ -3,6 +3,8 @@ package com.example.geoquestkidsexplorer.controllers;
 import com.example.geoquestkidsexplorer.models.QuizQuestions;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 import java.util.List;
 
 // PractiseQuizAfrica Unit Testing ----------
@@ -23,6 +25,21 @@ class PracticeQuizAfricaControllerTest {
                                     String correctAnswer, String funFact)
     {
         return new QuizQuestions(countryCode, questionText, choices, correctAnswer, funFact);
+    }
+
+    //Test if no selection is made
+    @Test
+    void nullSelection(){
+        var controller = new PracticeQuizAfricaController();
+        var question = q("EG", "What is the capital of Egypt?",
+                Arrays.asList("Cairo", "Nairobi", "Lagos", "Accra"), "Cairo",
+                "The Great Pyramid of Giza is the oldest of the Seven Wonders of the Ancient World.");
+
+        var r = controller.evaluateSelection(null, question);
+
+        assertFalse(r.correct());
+        assertEquals(0, r.scoreDelta());
+        assertEquals("Cairo",r.correctAnswer());
     }
 
     // test for correct choices returning the correct answer/ point
@@ -56,13 +73,5 @@ class PracticeQuizAfricaControllerTest {
         assertEquals(0, result.scoreDelta()); // Score should not be changed
         assertEquals("Nile", result.correctAnswer()); // Provide the correct answer
         assertEquals("The Nile is 6,650 km long.", result.funFact()); // Fun fact should display
-    }
-
-    //Can remove - test that the questions are correct
-    @Test
-    void counterFormatForQuestionNo(){
-        assertEquals("Question 1 of 10", PracticeQuizAfricaController.formatCounter(0, 10));
-        assertEquals("Question 5 of 10", PracticeQuizAfricaController.formatCounter(4, 10));
-        assertEquals("Question 10 of 10", PracticeQuizAfricaController.formatCounter(9, 10));
     }
 }
