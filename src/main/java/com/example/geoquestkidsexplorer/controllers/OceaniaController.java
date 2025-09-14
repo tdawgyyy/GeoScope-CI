@@ -31,6 +31,7 @@ public class OceaniaController {
 
         TestPageController controller = loader.getController();
         controller.setRegion("Oceania");
+        controller.loadNextQuestion();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
