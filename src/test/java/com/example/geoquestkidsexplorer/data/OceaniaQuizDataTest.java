@@ -15,12 +15,12 @@ import static org.junit.jupiter.api.Assertions.*;
  * assertTrue - Asserts that the condition is true
  * */
 
-class AfricaQuizDataTest {
+class OceaniaQuizDataTest {
 
     @Test
     void questionsHasFourChoices(){
-        //Get the practise quesations from AfricaQuizData and store it in list questions
-        List<QuizQuestions> questions = AfricaQuizData.getPracticeQuestions();
+        //Get the practise quesations from OceaniaQuizData and store it in list questions
+        List<QuizQuestions> questions = OceaniaQuizData.getPracticeQuestions();
 
         //Assert that the box/label should not be empty
         assertFalse(questions.isEmpty(), "Question box should not be empty");
@@ -37,8 +37,8 @@ class AfricaQuizDataTest {
 
     @Test
     void questionsHasValidAnswers(){
-        //Get the practise quesations from AfricaQuizData and store it in list questions
-        List<QuizQuestions> questions = AfricaQuizData.getPracticeQuestions();
+        //Get the practise quesations from AntarticaQuizData and store it in list questions
+        List<QuizQuestions> questions = OceaniaQuizData.getPracticeQuestions();
 
         for (QuizQuestions q: questions){
             assertNotNull(q.getCountryCode(), "Country code must not be empty");
