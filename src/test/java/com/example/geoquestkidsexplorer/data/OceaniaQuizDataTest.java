@@ -38,7 +38,7 @@ class OceaniaQuizDataTest {
     @Test
     void questionsHasValidAnswers(){
         //Get the practise quesations from AntarticaQuizData and store it in list questions
-        List<QuizQuestions> questions = AntarcticaQuizData.getPracticeQuestions();
+        List<QuizQuestions> questions = OceaniaQuizData.getPracticeQuestions();
 
         for (QuizQuestions q: questions){
             assertNotNull(q.getCountryCode(), "Country code must not be empty");
