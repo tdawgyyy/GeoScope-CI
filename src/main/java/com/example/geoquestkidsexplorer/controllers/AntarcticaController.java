@@ -54,7 +54,7 @@ public class AntarcticaController {
         }
     }
 
-    /*@FXML
+    @FXML
     private void handleLearn(ActionEvent event) throws IOException {
         System.out.println("User chose to learn about Antarctica.");
 
@@ -83,9 +83,9 @@ public class AntarcticaController {
         Scene scene = new Scene(flashcardRoot);
         stage.setScene(scene);
         stage.show();
-    }*/
+    }
 
-    /*@FXML
+    @FXML
     private void handleBackToHome(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml"));
         Parent root = loader.load();
@@ -93,5 +93,5 @@ public class AntarcticaController {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.getScene().setRoot(root);
         stage.show();
-    }*/
+    }
 }
