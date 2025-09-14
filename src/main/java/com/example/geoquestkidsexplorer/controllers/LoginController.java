@@ -194,7 +194,9 @@ public class LoginController {
     /* FOR REGISTRATION VALIDATION UNIT TESTING -------
     * In order to pull and extract data
     * Makes future testing much easier
+    * handles the internal logic separately from the UI
     * */
+    //Validate registration logic
     public String validateRegistrationInputs(String username, String email, String role,
                                              String password, String confirm, String avatarDisplay){
         if (username.isBlank() || email.isBlank() || role.isBlank() || password.isBlank() || confirm.isBlank()) {
@@ -215,6 +217,9 @@ public class LoginController {
         }
         return null;
     }
+
+    //Validate login logic (Nikki will do this, because I'm in charge of loginController unit testing):
+
 
     // ===========================
     // Switchers
