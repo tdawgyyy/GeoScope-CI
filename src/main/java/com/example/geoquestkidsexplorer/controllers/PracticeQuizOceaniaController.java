@@ -1,8 +1,9 @@
 package com.example.geoquestkidsexplorer.controllers;
 
-import com.example.geoquestkidsexplorer.data.AfricaQuizData;
-import com.example.geoquestkidsexplorer.data.OceaniaQuizData;
-import com.example.geoquestkidsexplorer.models.QuizQuestions;
+/*import com.example.geoquestkidsexplorer.data.OceaniaQuizData;
+import com.example.geoquestkidsexplorer.models.QuizQuestions;*/
+import com.example.geoquestkidsexplorer.database.DatabaseManager;
+import com.example.geoquestkidsexplorer.models.PracticeQuizQuestions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,12 +14,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.ImageView; // Import ImageView
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,35 +31,52 @@ public class PracticeQuizOceaniaController {
 
     @FXML private Label questionCounterLabel;
     @FXML private Label scoreLabel;
-    @FXML private Label countryCodeLabel;
+    //@FXML private Label countryCodeLabel;
+    @FXML private ImageView countryImageView; // Add this FXML annotation for the ImageView
     @FXML private Label questionLabel;
     @FXML private VBox quizOptionsContainer;
     @FXML private Label feedbackLabel;
     @FXML private Label funFactLabel;
     @FXML private Button nextQuestionButton;
 
-    private List<QuizQuestions> questions;
+    //private List<QuizQuestions> questions; //Note: will delete if not nedded.
+
+    // Change the type to hold the new PracticeQuizQuestion objects
+    private List<PracticeQuizQuestions> questions = new ArrayList<>();
     private int currentQuestionIndex = 0;
     private int score = 0;
 
     private ToggleGroup answerToggleGroup;
 
-    @FXML
+    /*@FXML
     public void initialize() {
         questions = OceaniaQuizData.getPracticeQuestions();
         Collections.shuffle(questions);
-
         answerToggleGroup = new ToggleGroup();
+        loadQuestion();
+    }*/
 
+    @FXML
+    public void initialize() {
+        // Generate and store all questions at the start
+        // This is a simple example; you can adjust how many questions you want.
+        final int numberOfQuestions = 10;
+        for (int i = 0; i < numberOfQuestions; i++) {
+            PracticeQuizQuestions q = DatabaseManager.getPracticeQuizQuestion("Oceania");
+            if (q != null) {
+                questions.add(q);
+            }
+        }
+        answerToggleGroup = new ToggleGroup();
         loadQuestion();
     }
 
     // FOR UNIT TESTING -------
     // I Only added this method to help with my uni testing and I didn't change anything in your code :)
-    public EvalResult evaluateSelection(String selectedAnswer, QuizQuestions q){
+    public EvalResult evaluateSelection(String selectedAnswer, PracticeQuizQuestions q){
         if(q == null) return new EvalResult(false, 0, "", "");
-        String correct = q.getCorrectAnswer();
-        String fact = q.getFunFact() == null? "": q.getFunFact();
+        String correct = q.correctAnswer();
+        String fact = q.funFact() == null? "": q.funFact();
         boolean isCorrect = selectedAnswer != null && selectedAnswer.equals(correct);
         int delta = isCorrect ? 1 : 0;
         return new EvalResult(isCorrect, delta, correct, fact);
@@ -69,12 +89,12 @@ public class PracticeQuizOceaniaController {
 
     private void loadQuestion() {
         if (currentQuestionIndex < questions.size()) {
-            QuizQuestions currentQuestion = questions.get(currentQuestionIndex);
+            PracticeQuizQuestions currentQuestion = questions.get(currentQuestionIndex);
 
             // Update labels
             questionCounterLabel.setText(String.format("Question %d of %d", currentQuestionIndex + 1, questions.size()));
-            countryCodeLabel.setText(currentQuestion.getCountryCode());
-            questionLabel.setText(currentQuestion.getQuestionText());
+            countryImageView.setImage(currentQuestion.countryImage());
+            questionLabel.setText(currentQuestion.questionText());
 
             // Clear previous state and hide fun facts
             quizOptionsContainer.getChildren().clear();
@@ -84,7 +104,7 @@ public class PracticeQuizOceaniaController {
             nextQuestionButton.setVisible(false);
 
             // Create and populate quiz option tiles (HBoxes)
-            for (String choice : currentQuestion.getChoices()) {
+            for (String choice : currentQuestion.choices()) {
                 HBox tile = new HBox(10); // Spacing of 10
                 tile.getStyleClass().add("quiz-option-tile");
 
@@ -118,8 +138,14 @@ public class PracticeQuizOceaniaController {
         Label selectedLabel = (Label) selectedTile.getChildren().get(1);
         String selectedAnswer = selectedLabel.getText();
 
-        String correctAnswer = questions.get(currentQuestionIndex).getCorrectAnswer();
-        String funFact = questions.get(currentQuestionIndex).getFunFact();
+        //Previous method for the practice mode quiz! will be deleted if not needed.
+        /*String correctAnswer = questions.get(currentQuestionIndex).correctAnswer();
+        String funFact = questions.get(currentQuestionIndex).funFact();*/
+
+        //This method is a helper for the modified practice mode quiz with images.
+        PracticeQuizQuestions currentQuestion = questions.get(currentQuestionIndex);
+        String correctAnswer = currentQuestion.correctAnswer();
+        String funFact = currentQuestion.funFact();
 
         // Disable click events on all tiles
         quizOptionsContainer.getChildren().forEach(node -> node.setDisable(true));
