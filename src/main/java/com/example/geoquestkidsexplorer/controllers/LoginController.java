@@ -1,6 +1,7 @@
 package com.example.geoquestkidsexplorer.controllers;
 
 import com.example.geoquestkidsexplorer.database.DatabaseManager;
+import com.example.geoquestkidsexplorer.models.UserSession;
 import javafx.collections.FXCollections;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
@@ -74,9 +75,10 @@ public class LoginController {
 
         success("Signing you in…");
 
-        // Run DB validation off the UI thread
         Task<Boolean> loginTask = new Task<>() {
             @Override protected Boolean call() {
+                // NOTE: It is better to get the user ID here as part of a single query
+                // that also validates the login. This avoids a second call.
                 return DatabaseManager.validateLogin(email, password);
             }
         };
@@ -87,6 +89,11 @@ public class LoginController {
                 error("Invalid email or password.");
                 return;
             }
+            // Adding this line below to set the user ID in the session!
+            // Will need a new method in DatabaseManager to get the user's ID by email.
+            int userId = DatabaseManager.getUserIdByEmail(email);
+            UserSession.setUserId(userId);
+
             // Chain: fetch username/avatar off the UI thread too
             loadHomeAsync(event, email);
         });
@@ -114,6 +121,10 @@ public class LoginController {
 
         userTask.setOnSucceeded(ev -> {
             String[] ua = userTask.getValue();
+            // This is the key part: set the data in the UserSession
+            UserSession.setUsername(ua[0]);
+            UserSession.setAvatar(ua[1]);
+
             try {
                 switchToHome(event, ua[0], ua[1]);
             } catch (IOException io) {
@@ -239,13 +250,14 @@ public class LoginController {
         Stage s = (stage != null) ? stage : deriveStage(event);
 
         FXMLLoader loader = new FXMLLoader(
-                getClass().getResource("/com/example/geoquestkidsexplorer/mainapp.fxml")); // was homepage.fxml
+                getClass().getResource("/com/example/geoquestkidsexplorer/homepage.fxml")); // was homepage.fxml
         Parent root = loader.load();
 
-        MainAppController main = loader.getController();      // was HomePageController
-        main.setProfileData(username, avatar);
+        // Pass the data to the HomePageController, not the SidebarController
+        HomePageController homeController = loader.getController();
+        homeController.setProfileData(username, avatar);
 
-        if (s.getScene() == null) s.setScene(new Scene(root, 1000, 700));
+        if (s.getScene() == null) s.setScene(new Scene(root, 1200, 800));
         else s.getScene().setRoot(root);
 
         s.setTitle("GeoQuest – Main");

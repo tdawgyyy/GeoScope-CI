@@ -67,14 +67,15 @@ public class AntarcticaController {
     @FXML
     private void handleFlashcards(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/geoquestkidsexplorer/FlashcardsPage.fxml"));
-        Parent flashcardRoot = loader.load();
+        Parent root = loader.load(); //Note: just modified this to use the default main frame window.
 
         FlashcardsController controller = loader.getController();
         controller.setRegion("Antarctica");
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(flashcardRoot);
-        stage.setScene(scene);
+        /*Scene scene = new Scene(root); //NOTE: commented this both to set a new logic
+        stage.setScene(scene);*/
+        stage.getScene().setRoot(root); //NOTE: add this line of codes to replace the first two line that has been commented.
         stage.show();
     }
 }

@@ -1,5 +1,7 @@
 package com.example.geoquestkidsexplorer.controllers;
 
+import com.example.geoquestkidsexplorer.database.DatabaseManager;
+import com.example.geoquestkidsexplorer.models.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,44 +12,70 @@ import javafx.stage.Stage;
 import javafx.scene.Node;
 
 import java.io.IOException;
-import javafx.scene.control.Label;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class HomePageController {
 
     @FXML
-    private Label explorerNameLabel;
+    private Label avatarLabel;
     @FXML
-    private Label explorerAvatarLabel;
-//    @FXML
-//    private Label scoreLabel; //NOTE:Will be deleted if not needed here.
+    private Label welcomeLabel;
+    @FXML
+    private Label subWelcomeLabel;
 
     @FXML
-    private Label perfectScoreLabel;
-    @FXML
-    private Label correctAnswerLabel;
-    @FXML
-    private Label currentLevelLabel;
-    @FXML
-    private Label levelsCompletedLabel;
-
+    private SidebarController mySidebarController; // FXML loader automatically injects this.
+    // A private field to hold the explorer's avatar string
+    private String explorerAvatar;
+    private String explorerName;
 
     /**
-     * Sets the profile data (name and avatar) on the dashboard.
-     * This method is called by the MainController after the home page FXML is loaded.
-     *
-     * @param explorerName The name of the explorer.
-     * @param selectedAvatar The emoji string for the selected avatar.
+     * The initialize method should not contain business logic.
+     * It's only for setting up UI elements.
      */
-    public void setProfileData(String explorerName, String selectedAvatar) {
-        explorerNameLabel.setText("Welcome, " + explorerName + "!");
-        explorerAvatarLabel.setText(selectedAvatar);
+    @FXML
+    public void initialize() {
+        // Get user data directly from the UserSession
+        String explorerName = UserSession.getUsername();
+        String explorerAvatar = UserSession.getAvatar();
 
-        // Set initial values for the tiles
-        //scoreLabel.setText("0"); //NOTE:Will be deleted if not needed.
-        perfectScoreLabel.setText("0");
-        correctAnswerLabel.setText("100%");
-        currentLevelLabel.setText("Current Level");
-        levelsCompletedLabel.setText("0/7");
+        if (explorerName != null && !explorerName.isEmpty()) {
+            welcomeLabel.setText("Welcome back, " + explorerName + "!");
+            avatarLabel.setText(explorerAvatar != null ? explorerAvatar : "");
+            subWelcomeLabel.setText("Ready to continue your adventure?");
+
+            // Ensure the sidebar also gets the data
+            if (mySidebarController != null) {
+                mySidebarController.setProfileData(explorerName, explorerAvatar);
+            }
+        } else {
+            // This handles cases where no one is logged in
+            welcomeLabel.setText("Welcome, Explorer!");
+            avatarLabel.setText("🙂");
+            subWelcomeLabel.setText("Ready for a new adventure!");
+        }
+    }
+
+    /**
+     * This is the new, centralized method for setting all user data.
+     * It is called by the LoginController after a successful login.
+     */
+    public void setProfileData(String username, String avatar) {
+        // Set the labels for the HomePageController
+        this.welcomeLabel.setText("Welcome back, " + username + "!");
+        this.avatarLabel.setText(avatar);
+        this.subWelcomeLabel.setText("Ready to continue your adventure?");
+
+        // Now, pass the same data to the SidebarController.
+        // The FXML loader ensures mySidebarController is not null here.
+        if (mySidebarController != null) {
+            mySidebarController.setProfileData(username, avatar);
+        }
     }
 
     /**

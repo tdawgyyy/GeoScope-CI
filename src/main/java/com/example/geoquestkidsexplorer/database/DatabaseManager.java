@@ -15,6 +15,17 @@ public class DatabaseManager {
 
     private static final String DATABASE_URL = "jdbc:sqlite:geoquest.db";
 
+    /**
+     * Establishes a connection to the SQLite database.
+     *
+     * @return A Connection object to the database.
+     * @throws SQLException If a database access error occurs.
+     */
+    public static Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(DATABASE_URL);
+        //Note: Added this for the sidebar navigation icons!
+    }
+
     // ===========================
     // Init / Schema
     // ===========================
@@ -190,6 +201,22 @@ public class DatabaseManager {
         }
     }
 
+    // Adding this new method to DatabaseManager.java file for fetching userID.
+    public static int getUserIdByEmail(String email) {
+        final String sql = "SELECT id FROM users WHERE email = ? LIMIT 1"; // assuming your users table has an 'id' column
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:geoquest.db");
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setString(1, email);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt("id");
+            }
+        } catch (SQLException e) {
+            System.err.println("getUserIdByEmail error: " + e.getMessage());
+        }
+        return -1; // Return -1 if not found
+    }
+
+
     /** Optional helper to load a profile by username. */
     public static UserProfile getUserProfileByUsername(String username) {
         final String sql = "SELECT username, email, avatar, level, role FROM users WHERE username = ? LIMIT 1";
@@ -358,5 +385,4 @@ public class DatabaseManager {
         }
         return countries; // Returns the list, even if it's empty
     }
-
 }
