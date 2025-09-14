@@ -19,7 +19,7 @@ class AsiaQuizDataTest {
 
     @Test
     void questionsHasFourChoices(){
-        //Get the practise quesations from AntarticaQuizData and store it in list questions
+        //Get the practise quesations from AsiaQuizData and store it in list questions
         List<QuizQuestions> questions = AsiaQuizData.getPracticeQuestions();
 
         //Assert that the box/label should not be empty

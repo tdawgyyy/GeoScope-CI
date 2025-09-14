@@ -19,8 +19,8 @@ class OceaniaQuizDataTest {
 
     @Test
     void questionsHasFourChoices(){
-        //Get the practise quesations from AntarticaQuizData and store it in list questions
-        List<QuizQuestions> questions = AsiaQuizData.getPracticeQuestions();
+        //Get the practise quesations from OceaniaQuizData and store it in list questions
+        List<QuizQuestions> questions = OceaniaQuizData.getPracticeQuestions();
 
         //Assert that the box/label should not be empty
         assertFalse(questions.isEmpty(), "Question box should not be empty");
