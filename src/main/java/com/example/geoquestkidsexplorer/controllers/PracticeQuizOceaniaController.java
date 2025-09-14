@@ -3,6 +3,7 @@ package com.example.geoquestkidsexplorer.controllers;
 /*import com.example.geoquestkidsexplorer.data.OceaniaQuizData;
 import com.example.geoquestkidsexplorer.models.QuizQuestions;*/
 import com.example.geoquestkidsexplorer.database.DatabaseManager;
+import com.example.geoquestkidsexplorer.models.QuizQuestions;
 import com.example.geoquestkidsexplorer.models.PracticeQuizQuestions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -73,19 +74,17 @@ public class PracticeQuizOceaniaController {
 
     // FOR UNIT TESTING -------
     // I Only added this method to help with my uni testing and I didn't change anything in your code :)
-    public EvalResult evaluateSelection(String selectedAnswer, PracticeQuizQuestions q){
+    public EvalResult evaluateSelection(String selectedAnswer, QuizQuestions q){
         if(q == null) return new EvalResult(false, 0, "", "");
-        String correct = q.correctAnswer();
-        String fact = q.funFact() == null? "": q.funFact();
+
+        String correct = q.getCorrectAnswer();
+        String fact = q.getFunFact() == null? "": q.getFunFact();
+
         boolean isCorrect = selectedAnswer != null && selectedAnswer.equals(correct);
         int delta = isCorrect ? 1 : 0;
         return new EvalResult(isCorrect, delta, correct, fact);
     }
-    // Helper for testing
-    public static String formatCounter(int index0Based, int total){
-        return String.format("Question %d of %d", index0Based + 1, total);
-    }
-    //--------------------
+
 
     private void loadQuestion() {
         if (currentQuestionIndex < questions.size()) {
