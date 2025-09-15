@@ -35,7 +35,7 @@ public class OceaniaController {
         // Get the source of the click, which is the VBox tile.
         Node clickedTile = (Node) event.getSource();
         String tileId = clickedTile.getId();
-
+/*
 <<<<<<< HEAD
         TestPageController controller = loader.getController();
         controller.setRegion("Oceania");
@@ -54,7 +54,7 @@ public class OceaniaController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }/*
 >>>>>>> fef85a8158a0a260cc1e24e61721080b4d9854d4
 
     //Note: this is Aaliyah's method reference on how you can link your .fxml page for your test quiz pages for other countries.
@@ -101,12 +101,12 @@ public class OceaniaController {
      * @param fxmlPath The path to the FXML file to load.
      * @param event The event that triggered the action.
      * @throws IOException If the FXML file cannot be loaded.
-     */
+     *//*
     private void loadScene(String fxmlPath, Event event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
         Scene scene = new Scene(root);
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
     }
 }
