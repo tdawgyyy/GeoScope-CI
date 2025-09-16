@@ -33,8 +33,9 @@ class FlashCardsTest {
         return new WritableImage(1, 1);
     }
 
+    // testing if CorrectImage Loads
     @Test
-    void correctImageLoad() {
+    void testCorrectImageLoads() {
         var mock = new MockFlashcardDB().add("Australia", tinyImage());
         mock.fillInternalCountries(controller);
         ImageView imgView = (ImageView) getField(controller, "countryImageView");
@@ -43,8 +44,9 @@ class FlashCardsTest {
         assertTrue(imgView.isVisible());
     }
 
+    // testing correct image loading through using MockFlashCard
     @Test
-    void correctImageForNewZealandLoad() {
+    void testCorrectImageForNewZealandLoad() {
         var mock = new MockFlashcardDB()
                 .add("New Zealand", tinyImage());
         mock.fillInternalCountries(controller);
@@ -61,7 +63,7 @@ class FlashCardsTest {
     }
 
     @Test
-    void correctImageForAustraliaLoad() {
+    void testCorrectImageForAustraliaLoad() {
         var mock = new MockFlashcardDB()
                 .add("Australia", null);
         mock.fillInternalCountries(controller);
@@ -76,10 +78,8 @@ class FlashCardsTest {
 
     //Test if the no countries message display
     @Test
-    void showsNoCountriesMessage() {
+    void testIfItShowsNoCountriesMessage() {
         new MockFlashcardDB().fillInternalCountries(controller);
-
-        ImageView img = (ImageView) getField(controller, "countryImageView");
         Label back = (Label) getField(controller, "backTextLabel");
 
         //Assert if expected message equals to Label message in controller
